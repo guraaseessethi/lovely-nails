@@ -205,6 +205,8 @@ async function main() {
   });
 
   console.log("Work photos");
+  // Listed in the order the site shows them. The site shows the Studio list bottom-up
+  // (newest uploads first), so the array is reversed before saving.
   const work: [string, string, string][] = [
     // file, category, alt
     ["from-old-site/old-site-ALE9798.jpg", "Pedicure", "Pedicure with white-tipped toes resting on a towel beside a yellow rose"],
@@ -226,7 +228,7 @@ async function main() {
   for (const [file, category, alt] of work) {
     photos.push({ _key: key(), ...(await image(file, alt, { category })) });
   }
-  await save({ _id: "workPhotos", _type: "workPhotos", photos });
+  await save({ _id: "workPhotos", _type: "workPhotos", photos: photos.reverse() });
 
   console.log("Journal drafts (not published: April shapes each one first)");
   const posts: [string, string, string, string, string, string][] = [

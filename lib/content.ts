@@ -122,25 +122,24 @@ export async function getPageSeo(): Promise<PageSeo> {
   return out;
 }
 
-/** Newest uploads first. */
+/**
+ * Newest first: new uploads are added to the end of the list in the Studio, so the
+ * site shows the list bottom-up. April can drag photos to change the order.
+ */
 export async function getWorkPhotos(): Promise<WorkPhoto[]> {
-  type Raw = NonNullable<RawImage> & { _key: string; category?: string; caption?: string; createdAt?: string };
+  type Raw = NonNullable<RawImage> & { _key: string; category?: string; caption?: string };
   const rows = await query<Raw[] | null>(
     `*[_id == "workPhotos"][0].photos[]{_key, category, caption, alt, crop, hotspot,
-      "createdAt": asset->_createdAt,
       "asset": asset->{_id, metadata{lqip, dimensions{width, height}}}}`,
     {},
     ["workPhotos"],
   );
-  return (rows ?? [])
-    .map((r, i) => ({ r, i }))
-    .sort((a, b) => (b.r.createdAt ?? "").localeCompare(a.r.createdAt ?? "") || b.i - a.i)
-    .flatMap(({ r }) => {
-      const img = toImg(r, "Nails by Lovely Nails Spa");
-      if (!img) return [];
-      const category = WORK_CATEGORIES.includes(r.category as WorkCategory) ? (r.category as WorkCategory) : undefined;
-      return [{ ...img, key: r._key, category, caption: r.caption }];
-    });
+  return [...(rows ?? [])].reverse().flatMap((r) => {
+    const img = toImg(r, "Nails by Lovely Nails Spa");
+    if (!img) return [];
+    const category = WORK_CATEGORIES.includes(r.category as WorkCategory) ? (r.category as WorkCategory) : undefined;
+    return [{ ...img, key: r._key, category, caption: r.caption }];
+  });
 }
 
 const POST_CARD = `"slug": slug.current, title, date, tag, excerpt, "cover": coverImage${IMAGE}`;

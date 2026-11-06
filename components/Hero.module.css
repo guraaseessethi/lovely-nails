@@ -16,7 +16,10 @@
 .overlay {
   position: absolute;
   inset: 0;
-  background: var(--overlay);
+  /* Extra shade behind the headline so white text stays readable on bright photos. */
+  background:
+    linear-gradient(to top right, rgba(17, 17, 17, 0.45), rgba(17, 17, 17, 0) 70%),
+    var(--overlay);
 }
 
 .notice {

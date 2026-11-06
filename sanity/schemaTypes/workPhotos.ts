@@ -13,7 +13,7 @@ export const workPhotos = defineType({
       title: "Photos",
       type: "array",
       description:
-        "Drag a batch of photos straight onto this box to upload them all at once. Then click each one to pick its category and describe it. Newest photos show first on the site.",
+        "Drag a batch of photos straight onto this box to upload them all at once. Then click each one to pick its category and describe it. New uploads go to the bottom of this list and show first on the site; drag to change the order.",
       options: { layout: "grid" },
       of: [
         defineArrayMember({

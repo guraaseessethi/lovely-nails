@@ -39,7 +39,8 @@ export function useDialog(
       }
       if (e.key !== "Tab" || !node) return;
       const items = Array.from(node.querySelectorAll<HTMLElement>(FOCUSABLE)).filter(
-        (el) => el.offsetParent !== null || el === document.activeElement,
+        // getClientRects, not offsetParent: fixed-position buttons have no offsetParent.
+        (el) => el.getClientRects().length > 0 || el === document.activeElement,
       );
       if (items.length === 0) {
         e.preventDefault();
