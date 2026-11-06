@@ -1,6 +1,7 @@
 import { CleanBand } from "@/components/CleanBand";
 import { Hero } from "@/components/Hero";
 import { Highlights } from "@/components/Highlights";
+import { InstagramStrip } from "@/components/InstagramStrip";
 import { Journal } from "@/components/Journal";
 import { MeetApril } from "@/components/MeetApril";
 import { Reviews } from "@/components/Reviews";
@@ -18,6 +19,7 @@ import {
   getSettings,
   getWorkPhotos,
 } from "@/lib/content";
+import { getInstagramPosts } from "@/lib/instagram";
 import { pageMetadata } from "@/lib/seo";
 
 export async function generateMetadata() {
@@ -25,7 +27,7 @@ export async function generateMetadata() {
 }
 
 export default async function HomePage() {
-  const [settings, hours, notice, posts, backgrounds, about, services, reviews, photos] = await Promise.all([
+  const [settings, hours, notice, posts, backgrounds, about, services, reviews, photos, instagram] = await Promise.all([
     getSettings(),
     getHours(),
     getNotice(),
@@ -35,6 +37,7 @@ export default async function HomePage() {
     getServices(),
     getReviews(),
     getWorkPhotos(),
+    getInstagramPosts(),
   ]);
   const showJournal = posts.length > 0;
 
@@ -46,6 +49,7 @@ export default async function HomePage() {
       <Services services={services} />
       <CleanBand background={backgrounds.clean} />
       <WorkGallery photos={photos} />
+      {instagram.length > 0 && <InstagramStrip posts={instagram} profileUrl={settings.instagram} />}
       <Reviews reviews={reviews} settings={settings} />
       {showJournal && <Journal posts={posts} />}
       <Visit settings={settings} hours={hours} background={backgrounds.visit} />
