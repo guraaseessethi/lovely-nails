@@ -1,0 +1,46 @@
+.footer {
+  background: var(--black);
+  color: var(--latte);
+}
+
+.inner {
+  max-width: var(--max);
+  margin: 0 auto;
+  padding: 44px var(--side) calc(44px + var(--tabbar-space));
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: 22px;
+  font-size: 14px;
+}
+
+.logo {
+  font-family: var(--serif);
+  font-size: 28px;
+  color: var(--white);
+}
+
+.links {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0 24px;
+}
+
+.links a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  color: var(--white);
+}
+
+.links a:hover {
+  color: var(--sky);
+}
+
+.footer :focus-visible {
+  outline-color: var(--sky);
+}

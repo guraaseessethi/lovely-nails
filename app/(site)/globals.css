@@ -1,0 +1,290 @@
+/* Design tokens: the approved palette only. */
+:root {
+  --white: #ffffff;
+  --black: #111111;
+  --espresso: #3b2a22;
+  --mocha: #7a5c4b;
+  --latte: #d9c7b8;
+  --sand: #f3ece5;
+  --cyan: #00aeeb; /* buttons only, always black text */
+  --sky: #a8e1f7; /* italic accents on dark backgrounds */
+  --link: #1c6e93;
+  --pale: #e1f1f9;
+
+  --overlay: rgba(17, 17, 17, 0.42);
+  --rule: rgba(217, 199, 184, 0.7);
+
+  --serif: var(--font-cormorant), Georgia, serif;
+  --sans: var(--font-poppins), system-ui, sans-serif;
+
+  --max: 1240px;
+  --side: 20px;
+  --pad-y: 72px;
+  --tabbar-space: 112px;
+
+  --ease: cubic-bezier(0.65, 0, 0.35, 1);
+}
+
+@media (min-width: 768px) {
+  :root {
+    --side: 32px;
+    --pad-y: 96px;
+  }
+}
+
+@media (min-width: 1024px) {
+  :root {
+    --pad-y: 120px;
+    --tabbar-space: 0px;
+  }
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--white);
+  color: var(--black);
+  font-family: var(--sans);
+  font-weight: 300;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+img,
+svg {
+  display: block;
+  max-width: 100%;
+}
+
+a {
+  color: var(--link);
+}
+
+a:hover {
+  color: var(--black);
+}
+
+button {
+  font: inherit;
+  color: inherit;
+}
+
+:focus-visible {
+  outline: 2px solid var(--link);
+  outline-offset: 3px;
+}
+
+.onDark :focus-visible {
+  outline-color: var(--sky);
+}
+
+h1,
+h2,
+h3,
+p,
+figure,
+blockquote {
+  margin: 0;
+}
+
+.visuallyHidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.skipLink {
+  position: absolute;
+  left: 12px;
+  top: -60px;
+  z-index: 100;
+  padding: 12px 18px;
+  border-radius: 999px;
+  background: var(--white);
+  color: var(--black);
+  font-size: 14px;
+}
+
+.skipLink:focus {
+  top: 12px;
+}
+
+/* Layout primitives */
+.container {
+  width: 100%;
+  max-width: var(--max);
+  margin: 0 auto;
+  padding: var(--pad-y) var(--side);
+}
+
+/* Type primitives */
+.eyebrow {
+  font-size: 12px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--mocha);
+}
+
+.label {
+  font-size: 11px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--mocha);
+}
+
+.h2 {
+  font-family: var(--serif);
+  font-weight: 300;
+  font-size: clamp(44px, 5vw, 72px);
+  line-height: 1;
+  color: var(--black);
+}
+
+.accent {
+  font-style: italic;
+  color: var(--link);
+}
+
+.onDark .accent {
+  color: var(--sky);
+}
+
+.body {
+  font-size: 17px;
+  line-height: 1.85;
+  color: var(--espresso);
+}
+
+.sectionHead {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 20px 24px;
+}
+
+.stack {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* Buttons */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  min-height: 52px;
+  padding: 0 28px;
+  border-radius: 999px;
+  border: 1px solid transparent;
+  font-size: 14px;
+  letter-spacing: 0.04em;
+  text-decoration: none;
+  cursor: pointer;
+  transition:
+    background-color 0.2s,
+    color 0.2s,
+    border-color 0.2s;
+}
+
+.btnCyan {
+  background: var(--cyan);
+  color: var(--black);
+  font-weight: 500;
+}
+
+.btnCyan:hover {
+  background: var(--sky);
+  color: var(--black);
+}
+
+.btnOutline {
+  border-color: var(--black);
+  color: var(--black);
+  background: transparent;
+}
+
+.btnOutline:hover {
+  background: var(--black);
+  color: var(--white);
+}
+
+.btnOutlineLight {
+  border-color: var(--white);
+  color: var(--white);
+  background: transparent;
+}
+
+.btnOutlineLight:hover {
+  background: var(--white);
+  color: var(--black);
+}
+
+.btnRow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+/* Round icon button (lightbox, modals, sheets) */
+.iconBtn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  flex-shrink: 0;
+  border-radius: 999px;
+  border: 1px solid var(--latte);
+  background: var(--white);
+  color: var(--black);
+  cursor: pointer;
+}
+
+.iconBtn:hover {
+  border-color: var(--black);
+}
+
+/* Visible placeholder for content still waiting on April */
+.askApril {
+  display: inline;
+  padding: 1px 6px;
+  border: 1px dashed currentColor;
+  border-radius: 6px;
+  font-style: normal;
+  font-family: var(--sans);
+  font-size: 0.85em;
+  color: var(--mocha);
+  background: var(--sand);
+}
+
+.onDark .askApril {
+  color: var(--latte);
+  background: transparent;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+  }
+}

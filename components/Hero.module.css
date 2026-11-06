@@ -1,0 +1,95 @@
+.hero {
+  position: relative;
+  min-height: max(700px, 100svh);
+  background-color: var(--espresso);
+  color: var(--white);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.bg {
+  object-fit: cover;
+  object-position: center;
+}
+
+.overlay {
+  position: absolute;
+  inset: 0;
+  background: var(--overlay);
+}
+
+.notice {
+  position: relative;
+  z-index: 2;
+  margin: 0;
+  padding: 12px var(--side);
+  background: var(--pale);
+  color: var(--black);
+  text-align: center;
+  font-size: 14px;
+  font-weight: 400;
+}
+
+.content {
+  position: relative;
+  flex: 1;
+  width: 100%;
+  max-width: var(--max);
+  margin: 0 auto;
+  padding: 40px var(--side) 72px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  gap: 26px;
+}
+
+.kicker {
+  font-size: 12px;
+  letter-spacing: 0.26em;
+  text-transform: uppercase;
+}
+
+.title {
+  font-family: var(--serif);
+  font-weight: 300;
+  font-size: clamp(54px, 7.6vw, 116px);
+  line-height: 0.95;
+}
+
+.accent {
+  font-style: italic;
+  color: var(--sky);
+}
+
+.lede {
+  max-width: 500px;
+  font-size: 17px;
+  line-height: 1.75;
+  color: var(--sand);
+}
+
+.cta {
+  min-height: 54px;
+  padding: 0 30px;
+}
+
+@media (min-width: 768px) {
+  .hero {
+    min-height: max(820px, 100svh);
+  }
+
+  .content {
+    padding: 60px var(--side) 96px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .hero {
+    min-height: max(860px, 100svh);
+  }
+
+  .content {
+    padding: 80px var(--side) 110px;
+  }
+}
