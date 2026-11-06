@@ -1,0 +1,107 @@
+.article {
+  position: relative;
+  width: min(780px, 100%);
+  margin: 0 auto;
+  border-radius: 30px;
+  background: var(--white);
+  overflow: hidden;
+}
+
+.hero {
+  position: relative;
+  aspect-ratio: 16 / 9;
+  background: var(--sand);
+}
+
+.body {
+  padding: 28px 22px 40px;
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+}
+
+.title {
+  font-family: var(--serif);
+  font-weight: 300;
+  font-size: clamp(38px, 4.4vw, 54px);
+  line-height: 1.05;
+  color: var(--black);
+}
+
+.lede {
+  font-size: 18px;
+  line-height: 1.85;
+  color: var(--espresso);
+}
+
+.h,
+.h3 {
+  margin: 12px 0 0;
+  font-family: var(--serif);
+  font-weight: 400;
+  line-height: 1.15;
+  color: var(--black);
+}
+
+.h {
+  font-size: 30px;
+}
+
+.h3 {
+  font-size: 24px;
+}
+
+.p,
+.list {
+  font-size: 17px;
+  line-height: 1.85;
+  color: var(--espresso);
+}
+
+.p strong,
+.list strong {
+  font-weight: 500;
+}
+
+.list {
+  margin: 0;
+  padding-left: 1.25em;
+}
+
+.figure {
+  margin: 0;
+}
+
+.img {
+  width: 100%;
+  height: auto;
+  border-radius: 22px;
+}
+
+.figcaption {
+  margin-top: 8px;
+  font-size: 13px;
+  color: var(--mocha);
+}
+
+.foot {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  margin-top: 12px;
+  padding-top: 24px;
+  border-top: 1px solid var(--rule);
+}
+
+.footNote {
+  font-size: 14px;
+  color: var(--mocha);
+}
+
+@media (min-width: 768px) {
+  .body {
+    padding: 44px 52px 52px;
+  }
+}

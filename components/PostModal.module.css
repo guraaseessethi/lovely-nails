@@ -1,0 +1,74 @@
+.backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  background: rgba(17, 17, 17, 0.6);
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  animation: fade 0.2s ease-out;
+}
+
+.dialog {
+  position: relative;
+  width: min(780px, 100%);
+  min-height: 100%;
+  animation: rise 0.3s var(--ease);
+}
+
+.dialog:focus {
+  outline: none;
+}
+
+.close {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  z-index: 2;
+  width: 46px;
+  height: 46px;
+  border: 0;
+  border-radius: 999px;
+  background: var(--white);
+  color: var(--black);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 6px 18px rgba(17, 17, 17, 0.15);
+}
+
+.dialog article {
+  min-height: 100%;
+  border-radius: 0;
+}
+
+@media (min-width: 768px) {
+  .backdrop {
+    padding: 48px 24px;
+  }
+
+  .dialog {
+    min-height: 0;
+  }
+
+  .dialog article {
+    min-height: 0;
+    border-radius: 30px;
+  }
+}
+
+@keyframes fade {
+  from {
+    opacity: 0;
+  }
+}
+
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+}

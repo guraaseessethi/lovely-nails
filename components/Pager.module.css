@@ -1,0 +1,38 @@
+.pager {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+}
+
+.btn {
+  min-width: 44px;
+  height: 44px;
+  padding: 0 12px;
+  border-radius: 999px;
+  border: 1px solid var(--latte);
+  background: var(--white);
+  color: var(--black);
+  font: 400 14px var(--sans);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.btn:hover:not(:disabled) {
+  border-color: var(--black);
+}
+
+.btn:disabled {
+  color: var(--latte);
+  cursor: default;
+}
+
+.current,
+.current:hover:not(:disabled) {
+  background: var(--black);
+  border-color: var(--black);
+  color: var(--white);
+}
