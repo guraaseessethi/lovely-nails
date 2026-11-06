@@ -25,6 +25,7 @@ const toMinutes = (t: string) => {
 };
 
 function label(hours: DayHours[]) {
+  if (hours.length === 0) return "Hours";
   const { day, minutes } = torontoNow();
   const today = hours.find((d) => d.day === day);
   if (!today || today.closed || !today.open || !today.close) return "Closed today";

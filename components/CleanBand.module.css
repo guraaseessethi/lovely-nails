@@ -1,0 +1,50 @@
+.band {
+  position: relative;
+  overflow: hidden;
+  background: var(--espresso);
+  color: var(--white);
+}
+
+.overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(17, 17, 17, 0.5);
+}
+
+.inner {
+  position: relative;
+  max-width: var(--max);
+  margin: 0 auto;
+  padding: 96px var(--side);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 22px;
+  text-align: center;
+}
+
+.title {
+  font-family: var(--serif);
+  font-weight: 300;
+  font-size: clamp(52px, 6.4vw, 96px);
+  line-height: 1;
+}
+
+.text {
+  max-width: 620px;
+  font-size: 17px;
+  line-height: 1.8;
+  color: var(--sand);
+}
+
+@media (min-width: 768px) {
+  .inner {
+    padding: 120px var(--side);
+  }
+}
+
+@media (min-width: 1024px) {
+  .inner {
+    padding: 150px var(--side);
+  }
+}

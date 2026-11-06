@@ -6,12 +6,14 @@ export type Img = {
   width: number;
   height: number;
   lqip?: string;
+  /** CSS object-position from the Sanity hotspot, e.g. "40% 60%" */
+  position?: string;
 };
 
 export const WORK_CATEGORIES = ["Gel", "Shellac", "Art", "Ombre", "Pedicure", "Natural"] as const;
 export type WorkCategory = (typeof WORK_CATEGORIES)[number];
 
-export type WorkPhoto = Img & { key: string; category: WorkCategory; caption?: string };
+export type WorkPhoto = Img & { key: string; category?: WorkCategory; caption?: string };
 
 export type DayHours = { day: string; closed: boolean; open?: string; close?: string };
 
