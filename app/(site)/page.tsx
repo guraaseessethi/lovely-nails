@@ -20,6 +20,7 @@ import {
   getWorkPhotos,
 } from "@/lib/content";
 import { getInstagramPosts } from "@/lib/instagram";
+import { nailSalonJsonLd, serializeJsonLd } from "@/lib/jsonld";
 import { pageMetadata } from "@/lib/seo";
 
 export async function generateMetadata() {
@@ -43,6 +44,10 @@ export default async function HomePage() {
 
   return (
     <main>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: serializeJsonLd(nailSalonJsonLd(settings, hours, backgrounds.hero)) }}
+      />
       <Hero settings={settings} hours={hours} showJournal={showJournal} background={backgrounds.hero} notice={notice} />
       <Highlights settings={settings} />
       <MeetApril about={about} settings={settings} />
