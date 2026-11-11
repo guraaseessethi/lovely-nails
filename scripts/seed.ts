@@ -123,7 +123,6 @@ async function main() {
     ["pedicure", "Pedicure", "Pedicure", "From $40", "Polish removal, shaping, cuticles, callus removal, sugar scrub, foot massage and polish. $55 with CND Shellac or Bio Seaweed Gel."],
     ["foot-massage", "Pedicure", "Foot massage", undefined, ""],
     ["classic-facial", "Skin", "Classic facial (60 min)", "$95", "Cleanse, tone, skin assessment, exfoliation, two electrotherapy treatments, massage and mask."],
-    ["specialized-facial", "Skin", "Acne, anti-aging, lymphatic or cupping facial (75 min)", "$110", "A specialized treatment plus the classic facial steps."],
     ["microdermabrasion", "Skin", "Microdermabrasion (40 min)", "$75", "Cleanse, tone, exfoliate, microdermabrasion and mask."],
     ["microdermabrasion-facial", "Skin", "Microdermabrasion with full facial (75 min)", "$110", "Adds ultrasound, iontophoresis, massage and a rubber mask."],
     ["waxing", "Waxing", "Waxing", "$7 to $50+", "Face, back, chest, arms, legs, bikini and Brazilian."],
