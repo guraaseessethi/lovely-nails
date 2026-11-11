@@ -10,7 +10,7 @@ export type Img = {
   position?: string;
 };
 
-export const WORK_CATEGORIES = ["Gel", "Shellac", "Art", "Ombre", "Pedicure", "Natural"] as const;
+export const WORK_CATEGORIES = ["Everyday", "Party", "Special Occasion", "Theme", "Wedding", "Graduation", "New Year", "Seasonal", "Simple", "Lovely Nails"] as const;
 export type WorkCategory = (typeof WORK_CATEGORIES)[number];
 
 export type WorkPhoto = Img & { key: string; category?: WorkCategory; caption?: string };
@@ -37,7 +37,6 @@ export type Settings = {
   googleUrl?: string;
   googleRating?: number;
   googleReviewCount?: number;
-  rogersTvUrl?: string;
   since?: number;
   logo?: Img;
   instagramExclude: string[];

@@ -83,14 +83,13 @@ async function main() {
     landmark: "In Barriegate Centre",
     lat: 44.3699919,
     lng: -79.6735421,
-    since: 2011,
+    since: 2008,
     logo: await image("from-old-site/logo-transparent.png", "Lovely Nails Spa logo"),
     instagram: "https://www.instagram.com/lovelynailsspabarrie/",
     facebook: "https://www.facebook.com/lovely.nailsbarrie",
     googleUrl: GOOGLE_URL,
     googleRating: 4.7,
     googleReviewCount: 328,
-    rogersTvUrl: "https://www.youtube.com/watch?v=HIMafWC34PM",
     instagramExclude: [],
   });
 
@@ -122,6 +121,7 @@ async function main() {
     ["ombre", "Nails", "Ombre nails", undefined, ""],
     ["nail-art", "Nails", "Nail art", undefined, "Bring a photo of the design you like."],
     ["pedicure", "Pedicure", "Pedicure", "From $40", "Polish removal, shaping, cuticles, callus removal, sugar scrub, foot massage and polish. $55 with CND Shellac or Bio Seaweed Gel."],
+    ["foot-massage", "Pedicure", "Foot massage", undefined, ""],
     ["classic-facial", "Skin", "Classic facial (60 min)", "$95", "Cleanse, tone, skin assessment, exfoliation, two electrotherapy treatments, massage and mask."],
     ["specialized-facial", "Skin", "Acne, anti-aging, lymphatic or cupping facial (75 min)", "$110", "A specialized treatment plus the classic facial steps."],
     ["microdermabrasion", "Skin", "Microdermabrasion (40 min)", "$75", "Cleanse, tone, exfoliate, microdermabrasion and mask."],
@@ -165,7 +165,7 @@ async function main() {
     _type: "about",
     // story stays empty on purpose: the site shows an [Ask April] marker until she provides it.
     secondParagraph:
-      "Lifelong regulars, families who bring their kids, seniors who feel looked after. That's the salon April has built on Burton Ave since 2011, one appointment at a time.",
+      "Lifelong regulars, families who bring their kids, seniors who feel looked after. That's the salon April has built on Burton Ave since 2008, one appointment at a time.",
     photo: await image(
       "stock/about-tech-painting-nails_unsplash-giorgio-trovato.jpg",
       "A nail technician painting a client's nails",
@@ -188,7 +188,7 @@ async function main() {
     home: {
       title: "Lovely Nails Spa | Nail Salon in Barrie on Burton Ave",
       description:
-        "Family nail spa in Barrie since 2011. Gel, shellac, nail art and pedicures in a clean, friendly salon. Walk-ins welcome.",
+        "Family nail spa in Barrie since 2008. Gel, shellac, nail art and pedicures in a clean, friendly salon. Walk-ins welcome.",
     },
     services: {
       title: "Manicures, Pedicures and Gel Nails in Barrie | Lovely Nails Spa",
@@ -208,22 +208,28 @@ async function main() {
   // Listed in the order the site shows them. The site shows the Studio list bottom-up
   // (newest uploads first), so the array is reversed before saving.
   const work: [string, string, string][] = [
-    // file, category, alt
-    ["from-old-site/old-site-ALE9798.jpg", "Pedicure", "Pedicure with white-tipped toes resting on a towel beside a yellow rose"],
-    ["from-old-site/old-site-ALE9757.jpg", "Ombre", "Pink-to-white ombre on long almond nails"],
-    ["from-old-site/old-site-ALE9741.jpg", "Natural", "Deep burgundy polish on long almond nails"],
-    ["from-old-site/old-site-ALE9754.jpg", "Natural", "Sheer pink polish on natural nails"],
-    ["from-old-site/old-site-ALE9762.jpg", "Natural", "Short natural nails holding a yellow rose"],
-    ["from-old-site/old-site-ALE9767.jpg", "Natural", "Burgundy polish on short nails, hands crossed"],
-    ["from-old-site/old-site-ALE9771.jpg", "Natural", "Pale neutral polish on long tapered nails"],
-    ["from-old-site/old-site-ALE9780.jpg", "Natural", "Light blue polish on almond nails"],
-    ["from-old-site/old-site-ALE9782.jpg", "Natural", "Coral pink polish with a white accent nail"],
-    ["from-old-site/old-site-ALE9784.jpg", "Natural", "Pastel blue and pink polish beside two roses"],
-    ["from-old-site/old-site-ALE9789.jpg", "Natural", "Four hands showing four different polish colours"],
-    ["from-old-site/old-site-ALE9793.jpg", "Natural", "Charcoal polish on short almond nails"],
-    ["stock/gallery-gel-tortoiseshell_unsplash-bryony-elena.jpg", "Gel", "Tortoiseshell gel nails"],
-    ["stock/gallery-natural-nude_unsplash-chelson-tamares.jpg", "Natural", "Nude polish on natural nails"],
+    // file, category, alt. Categories are April's list (Nov 2026); she can change any of them in the Studio.
+    ["from-april/ombre-orange-pink-almond.jpg", "Party", "Orange to hot pink ombre on almond nails"],
+    ["from-april/milky-white-gold-flake.jpg", "Special Occasion", "Milky white gel with gold flakes on oval nails"],
+    ["from-april/french-tips-almond.jpg", "Wedding", "Classic white French tips on almond nails"],
+    ["from-april/sheer-pink-square.jpg", "Simple", "Sheer pink on long square nails"],
+    ["from-april/lavender-short-gel.jpg", "Everyday", "Pastel lavender gel on short rounded nails"],
+    ["from-old-site/old-site-ALE9798.jpg", "Wedding", "Pedicure with white-tipped toes resting on a towel beside a yellow rose"],
+    ["from-old-site/old-site-ALE9757.jpg", "Special Occasion", "Pink-to-white ombre on long almond nails"],
+    ["from-old-site/old-site-ALE9741.jpg", "Party", "Deep burgundy polish on long almond nails"],
+    ["from-old-site/old-site-ALE9754.jpg", "Simple", "Sheer pink polish on natural nails"],
+    ["from-old-site/old-site-ALE9762.jpg", "Simple", "Short natural nails holding a yellow rose"],
+    ["from-old-site/old-site-ALE9767.jpg", "Everyday", "Burgundy polish on short nails, hands crossed"],
+    ["from-old-site/old-site-ALE9771.jpg", "Simple", "Pale neutral polish on long tapered nails"],
+    ["from-old-site/old-site-ALE9780.jpg", "Everyday", "Light blue polish on almond nails"],
+    ["from-old-site/old-site-ALE9782.jpg", "Everyday", "Coral pink polish with a white accent nail"],
+    ["from-old-site/old-site-ALE9784.jpg", "Seasonal", "Pastel blue and pink polish beside two roses"],
+    ["from-old-site/old-site-ALE9789.jpg", "Lovely Nails", "Four hands showing four different polish colours"],
+    ["from-old-site/old-site-ALE9793.jpg", "Everyday", "Charcoal polish on short almond nails"],
+    ["stock/gallery-gel-tortoiseshell_unsplash-bryony-elena.jpg", "Theme", "Tortoiseshell gel nails"],
+    ["stock/gallery-natural-nude_unsplash-chelson-tamares.jpg", "Simple", "Nude polish on natural nails"],
   ];
+
   const photos = [];
   for (const [file, category, alt] of work) {
     photos.push({ _key: key(), ...(await image(file, alt, { category })) });

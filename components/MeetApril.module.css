@@ -32,22 +32,6 @@
   gap: 22px;
 }
 
-.tv {
-  align-self: flex-start;
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  min-height: 44px;
-  font-size: 14px;
-  letter-spacing: 0.08em;
-  color: var(--black);
-  text-underline-offset: 6px;
-}
-
-.tv:hover {
-  color: var(--link);
-}
-
 @media (min-width: 1024px) {
   .grid {
     gap: 88px;

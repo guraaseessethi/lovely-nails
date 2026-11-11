@@ -25,7 +25,7 @@ export const workPhotos = defineType({
               title: "Category",
               type: "string",
               description: "Which filter this photo appears under on the site.",
-              options: { list: WORK_CATEGORIES, layout: "radio", direction: "horizontal" },
+              options: { list: WORK_CATEGORIES, layout: "radio" },
             }),
             defineField({
               name: "alt",

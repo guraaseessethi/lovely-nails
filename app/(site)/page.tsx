@@ -4,6 +4,7 @@ import { Highlights } from "@/components/Highlights";
 import { InstagramStrip } from "@/components/InstagramStrip";
 import { Journal } from "@/components/Journal";
 import { MeetApril } from "@/components/MeetApril";
+import { Mission } from "@/components/Mission";
 import { Reviews } from "@/components/Reviews";
 import { Services } from "@/components/Services";
 import { Visit } from "@/components/Visit";
@@ -18,6 +19,7 @@ import {
   getServices,
   getSettings,
   getWorkPhotos,
+  getYear,
 } from "@/lib/content";
 import { getInstagramPosts } from "@/lib/instagram";
 import { nailSalonJsonLd, serializeJsonLd } from "@/lib/jsonld";
@@ -28,7 +30,7 @@ export async function generateMetadata() {
 }
 
 export default async function HomePage() {
-  const [settings, hours, notice, posts, backgrounds, about, services, reviews, photos, instagram] = await Promise.all([
+  const [settings, hours, notice, posts, backgrounds, about, services, reviews, photos, instagram, year] = await Promise.all([
     getSettings(),
     getHours(),
     getNotice(),
@@ -39,6 +41,7 @@ export default async function HomePage() {
     getReviews(),
     getWorkPhotos(),
     getInstagramPosts(),
+    getYear(),
   ]);
   const showJournal = posts.length > 0;
 
@@ -51,6 +54,7 @@ export default async function HomePage() {
       <Hero settings={settings} hours={hours} showJournal={showJournal} background={backgrounds.hero} notice={notice} />
       <Highlights settings={settings} />
       <MeetApril about={about} settings={settings} />
+      <Mission settings={settings} year={year} />
       <Services services={services} />
       <CleanBand background={backgrounds.clean} />
       <WorkGallery photos={photos} />

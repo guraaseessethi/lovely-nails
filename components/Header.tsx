@@ -23,8 +23,11 @@ type Props = {
 
 export function Logo({ className }: { className?: string }) {
   return (
-    <span className={className}>
-      Lovely Nails<span className={styles.dot}>.</span>
+    <span className={`${styles.lockup} ${className ?? ""}`}>
+      <span className={styles.tagline}>Hey, where did you get those&hellip;</span>
+      <span>
+        Lovely Nails Spa<span className={styles.dot}>.</span>
+      </span>
     </span>
   );
 }

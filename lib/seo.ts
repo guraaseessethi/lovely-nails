@@ -13,7 +13,7 @@ const DEFAULTS: Record<keyof PageSeo, { title: string; description: string; path
   home: {
     title: "Lovely Nails Spa | Nail Salon in Barrie on Burton Ave",
     description:
-      "Family nail spa in Barrie since 2011. Gel, shellac, nail art and pedicures in a clean, friendly salon. Walk-ins welcome.",
+      "Family nail spa in Barrie since 2008. Gel, shellac, nail art and pedicures in a clean, friendly salon. Walk-ins welcome.",
     path: "/",
   },
   services: {

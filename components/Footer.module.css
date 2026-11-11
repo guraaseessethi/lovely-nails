@@ -41,6 +41,22 @@
   color: var(--sky);
 }
 
+.credit {
+  display: block;
+  margin-top: 6px;
+}
+
+.credit a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  color: var(--white);
+}
+
+.credit a:hover {
+  color: var(--sky);
+}
+
 .footer :focus-visible {
   outline-color: var(--sky);
 }

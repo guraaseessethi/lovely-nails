@@ -11,7 +11,6 @@ import { Pager } from "./Pager";
 import styles from "./WorkGallery.module.css";
 
 type Filter = "All" | WorkCategory;
-const FILTERS: Filter[] = ["All", ...WORK_CATEGORIES];
 
 export function WorkGallery({ photos, headingLevel = 2 }: { photos: WorkPhoto[]; headingLevel?: 1 | 2 }) {
   const Heading = headingLevel === 1 ? "h1" : "h2";
@@ -19,6 +18,8 @@ export function WorkGallery({ photos, headingLevel = 2 }: { photos: WorkPhoto[];
   const [page, setPage] = useState(0);
   const [open, setOpen] = useState<number | null>(null);
   const isPhone = useMedia("(max-width: 767px)");
+  // Only offer categories that have at least one photo.
+  const filters: Filter[] = ["All", ...WORK_CATEGORIES.filter((c) => photos.some((p) => p.category === c))];
 
   const perPage = isPhone ? 4 : 6;
   const filtered = filter === "All" ? photos : photos.filter((p) => p.category === filter);
@@ -44,7 +45,7 @@ export function WorkGallery({ photos, headingLevel = 2 }: { photos: WorkPhoto[];
             </Heading>
           </div>
           <div role="group" aria-label="Filter the work" className={styles.filters}>
-            {FILTERS.map((f) => (
+            {filters.map((f) => (
               <button
                 key={f}
                 type="button"

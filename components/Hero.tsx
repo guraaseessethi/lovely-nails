@@ -47,9 +47,9 @@ export function Hero({ settings, hours, showJournal, background, notice }: Props
         <h1 className={styles.title}>
           Lovely Nails.
           <br />
-          <span className={styles.accent}>Barrie&rsquo;s boutique</span>
+          <span className={styles.accent}>Barrie&rsquo;s nail spa</span>
           <br />
-          nail spa.
+          since {settings.since ?? 2008}.
         </h1>
         <p className={styles.lede}>
           Gel, shellac, nail art and pedicures in a clean, calm salon. The whole family is welcome.

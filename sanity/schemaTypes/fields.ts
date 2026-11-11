@@ -1,6 +1,6 @@
 import { defineField } from "sanity";
 
-export const WORK_CATEGORIES = ["Gel", "Shellac", "Art", "Ombre", "Pedicure", "Natural"];
+export const WORK_CATEGORIES = ["Everyday", "Party", "Special Occasion", "Theme", "Wedding", "Graduation", "New Year", "Seasonal", "Simple", "Lovely Nails"];
 
 export const POST_TAGS = ["Nail care", "Aftercare", "Trends", "In the salon", "Pedicures", "Nail art", "Family"];
 

@@ -46,7 +46,6 @@ export const siteSettings = defineType({
     defineField({ name: "googleUrl", title: "Google listing URL", type: "url", group: "social" }),
     defineField({ name: "googleRating", title: "Google rating", type: "number", group: "social", validation: (r) => r.min(1).max(5) }),
     defineField({ name: "googleReviewCount", title: "Google review count", type: "number", group: "social", validation: (r) => r.integer().min(0) }),
-    defineField({ name: "rogersTvUrl", title: "Rogers TV video URL", type: "url", group: "social" }),
     defineField({
       name: "instagramExclude",
       title: "Hide these Instagram posts",

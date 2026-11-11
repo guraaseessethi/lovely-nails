@@ -1,7 +1,6 @@
 import Image from "next/image";
 import type { About, Settings } from "@/lib/types";
 import { AskApril } from "./AskApril";
-import { Icon } from "./Icon";
 import styles from "./MeetApril.module.css";
 
 export function MeetApril({ about, settings }: { about: About; settings: Settings }) {
@@ -35,19 +34,12 @@ export function MeetApril({ about, settings }: { about: About; settings: Setting
           <p className="body">
             {about.story || (
               <AskApril>
-                her story in 2 to 3 lines: how she started in {settings.since ?? 2011}, and what she wants every client to
+                her story in 2 to 3 lines: how she started in {settings.since ?? 2008}, and what she wants every client to
                 feel when they leave
               </AskApril>
             )}
           </p>
           {about.secondParagraph && <p className="body">{about.secondParagraph}</p>}
-          {settings.rogersTvUrl && (
-            <a href={settings.rogersTvUrl} className={styles.tv} rel="noopener" target="_blank">
-              Watch April on Rogers TV Barrie
-              <Icon name="arrowUpRight" size={16} />
-              <span className="visuallyHidden">(opens YouTube in a new tab)</span>
-            </a>
-          )}
         </div>
       </div>
     </section>
