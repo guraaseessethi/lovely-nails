@@ -114,9 +114,10 @@ export const review = defineType({
     defineField({
       name: "name",
       title: "First name and last initial",
+      description: "Just the first name is fine if that's all Google shows.",
       type: "string",
       placeholder: "Tegan S.",
-      validation: (r) => r.required().regex(/^[^\s]+ [A-Z]\.$/).error('Use "First L." only.'),
+      validation: (r) => r.required().regex(/^[^\s]+( [A-Z]\.)?$/).error('Use "First L." or just the first name.'),
     }),
     defineField({ name: "sourceUrl", title: "Link to the review", type: "url" }),
     defineField({

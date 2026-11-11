@@ -139,22 +139,24 @@ async function main() {
     });
   }
 
-  console.log("Reviews (hidden until April approves the exact wording)");
-  const reviews: [string, string][] = [
-    ["tegan-s", "Tegan S."],
-    ["eva-s", "Eva S."],
-    ["mackenzie-m", "Mackenzie M."],
-    ["celeste-r", "Celeste R."],
-    ["melissa-v", "Melissa V."],
+  console.log("Reviews (Google, word for word; the last two are hidden placeholders)");
+  const reviews: [string, string, string | undefined][] = [
+    // id, name, quote (undefined = hidden placeholder)
+    ["tegan-s", "Tegan S.", "My whole experience was amazing. My nail artist was super nice and asked lots of questions to make sure she knew what i wanted! Everything was very clean and organized, and I’m so happy with how my nails turned out, I will definitely be returning!! Not a single complaint."],
+    ["eva-s", "Eva S.", undefined],
+    ["mackenzie-m", "Mackenzie M.", "Today was my first time ever going here and I had an amazing experience! Clean and beautiful salon with friendly staff and customers. I had a full set done with Anson and she absolutely nailed it! (Pun intended)"],
+    ["celeste-r", "Celeste R.", "I first went here for a shellac manicure a couple of months ago and I am a lifelong customer! Honestly, all the techs are outstanding and I have so much trust in them. They always do a great job and I leave happy every single time. I would recommend this place to everyone / anyone looking for a nail salon."],
+    ["melissa-v", "Melissa V.", undefined],
+    ["shania", "Shania", "Highly recommend this nail salon! She is incredibly fast at what she does while still being very detailed and doing an amazing job. You can tell she takes pride in her work and truly cares about her customers."],
   ];
-  for (const [id, name] of reviews) {
+  for (const [id, name, quote] of reviews) {
     await save({
       _id: `review-${id}`,
       _type: "review",
       name,
-      quote: `[Paste ${name}'s Google review here, word for word, once April approves it.]`,
+      quote: quote ?? `[Paste ${name}'s Google review here, word for word, once April approves it.]`,
       sourceUrl: GOOGLE_URL,
-      show: false,
+      show: Boolean(quote),
     });
   }
 
