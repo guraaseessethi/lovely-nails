@@ -15,6 +15,37 @@
   color: var(--espresso);
 }
 
+.tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: -24px;
+}
+
+.tab {
+  min-height: 44px;
+  padding: 0 18px;
+  border-radius: 999px;
+  border: 1px solid var(--latte);
+  background: transparent;
+  color: var(--black);
+  font: 400 12px var(--sans);
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+.tab:hover {
+  border-color: var(--black);
+}
+
+.on,
+.on:hover {
+  background: var(--black);
+  border-color: var(--black);
+  color: var(--white);
+}
+
 .card {
   background: var(--white);
   border-radius: 28px;
