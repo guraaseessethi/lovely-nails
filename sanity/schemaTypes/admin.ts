@@ -5,7 +5,7 @@ import { SearchIcon } from "@sanity/icons/Search";
 import { TagIcon } from "@sanity/icons/Tag";
 import { UserIcon } from "@sanity/icons/User";
 import { defineArrayMember, defineField, defineType } from "sanity";
-import { backgroundImage, imageWithAlt } from "./fields";
+import { backgroundImage, imageWithAlt, SERVICE_GROUPS } from "./fields";
 
 // Admin-only types. Never put secrets here: the dataset is publicly readable.
 
@@ -77,7 +77,7 @@ export const service = defineType({
     defineField({
       name: "group",
       type: "string",
-      options: { list: ["Nails", "Pedicure", "Skin", "Waxing"], layout: "radio", direction: "horizontal" },
+      options: { list: SERVICE_GROUPS, layout: "radio", direction: "horizontal" },
       validation: (r) => r.required(),
     }),
     defineField({ name: "order", type: "number", description: "Lower numbers show first within the group.", initialValue: 10 }),

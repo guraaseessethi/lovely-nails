@@ -5,6 +5,7 @@ import type { PortableTextBlock } from "next-sanity";
 import { client } from "./sanity/client";
 import { IMAGE, type RawImage, toImg } from "./sanity/image";
 import {
+  SERVICE_GROUPS,
   WORK_CATEGORIES,
   type About,
   type Backgrounds,
@@ -14,7 +15,6 @@ import {
   type PostCard,
   type Review,
   type Service,
-  type ServiceGroup,
   type Settings,
   type WorkCategory,
   type WorkPhoto,
@@ -63,7 +63,6 @@ export async function getNotice(): Promise<Notice> {
   return { text: n.text };
 }
 
-const GROUP_ORDER: ServiceGroup[] = ["Nails", "Pedicure", "Skin", "Waxing"];
 
 export async function getServices(): Promise<Service[]> {
   const rows = await query<(Service & { order?: number })[]>(
@@ -72,7 +71,7 @@ export async function getServices(): Promise<Service[]> {
     ["service"],
   );
   return rows.sort(
-    (a, b) => GROUP_ORDER.indexOf(a.group) - GROUP_ORDER.indexOf(b.group) || (a.order ?? 99) - (b.order ?? 99),
+    (a, b) => SERVICE_GROUPS.indexOf(a.group) - SERVICE_GROUPS.indexOf(b.group) || (a.order ?? 99) - (b.order ?? 99),
   );
 }
 

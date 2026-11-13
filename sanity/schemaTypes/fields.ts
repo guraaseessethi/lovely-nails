@@ -1,6 +1,9 @@
 import { defineField } from "sanity";
 
-export const WORK_CATEGORIES = ["Everyday", "Party", "Special Occasion", "Theme", "Wedding", "Graduation", "New Year", "Seasonal", "Simple", "Lovely Nails"];
+export const WORK_CATEGORIES = ["Everyday", "Ombre, French & Chrome", "Party", "Special Occasion", "Theme", "Wedding", "Graduation", "New Year", "Seasonal", "Simple", "Lovely Nails"];
+
+// Must match SERVICE_GROUPS in lib/types.ts.
+export const SERVICE_GROUPS = ["Natural nails", "Enhancements", "Waxing", "Facials", "Foot massage", "Kids"];
 
 export const POST_TAGS = ["Nail care", "Aftercare", "Trends", "In the salon", "Pedicures", "Nail art", "Family"];
 

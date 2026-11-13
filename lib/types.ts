@@ -10,7 +10,7 @@ export type Img = {
   position?: string;
 };
 
-export const WORK_CATEGORIES = ["Everyday", "Party", "Special Occasion", "Theme", "Wedding", "Graduation", "New Year", "Seasonal", "Simple", "Lovely Nails"] as const;
+export const WORK_CATEGORIES = ["Everyday", "Ombre, French & Chrome", "Party", "Special Occasion", "Theme", "Wedding", "Graduation", "New Year", "Seasonal", "Simple", "Lovely Nails"] as const;
 export type WorkCategory = (typeof WORK_CATEGORIES)[number];
 
 export type WorkPhoto = Img & { key: string; category?: WorkCategory; caption?: string };
@@ -43,7 +43,9 @@ export type Settings = {
   instagramHashtag?: string;
 };
 
-export type ServiceGroup = "Nails" | "Pedicure" | "Skin" | "Waxing";
+// Groups from April's 2026 price list, in menu order.
+export const SERVICE_GROUPS = ["Natural nails", "Enhancements", "Waxing", "Facials", "Foot massage", "Kids"] as const;
+export type ServiceGroup = (typeof SERVICE_GROUPS)[number];
 
 export type Service = {
   id: string;

@@ -12,6 +12,7 @@ import { basename, join, resolve } from "node:path";
 import { randomUUID } from "node:crypto";
 import { createClient } from "next-sanity";
 import { apiVersion, dataset, projectId } from "../sanity/env";
+import { PRICE_LIST_2026 } from "./price-list-2026";
 
 const token = process.env.SANITY_API_WRITE_TOKEN;
 if (!token) {
@@ -112,29 +113,15 @@ async function main() {
     notice: { enabled: false },
   });
 
-  console.log("Services (2018 prices, waiting on April's OK)");
-  const services: [string, string, string, string | undefined, string][] = [
-    // id, group, name, price, description
-    ["manicure", "Nails", "Manicure", "From $25", "Polish removal, shaping, cuticles, hand massage and polish. $40 with CND Shellac or Bio Seaweed Gel."],
-    ["artificial-nails", "Nails", "Artificial nails", "$50 to $65+", "CND Solar or Bio-Gel. Tips and overlays on natural nails."],
-    ["full-sets-fills", "Nails", "Full sets and fills", undefined, ""],
-    ["ombre", "Nails", "Ombre nails", undefined, ""],
-    ["nail-art", "Nails", "Nail art", undefined, "Bring a photo of the design you like."],
-    ["pedicure", "Pedicure", "Pedicure", "From $40", "Polish removal, shaping, cuticles, callus removal, sugar scrub, foot massage and polish. $55 with CND Shellac or Bio Seaweed Gel."],
-    ["foot-massage", "Pedicure", "Foot massage", undefined, ""],
-    ["classic-facial", "Skin", "Classic facial (60 min)", "$95", "Cleanse, tone, skin assessment, exfoliation, two electrotherapy treatments, massage and mask."],
-    ["microdermabrasion", "Skin", "Microdermabrasion (40 min)", "$75", "Cleanse, tone, exfoliate, microdermabrasion and mask."],
-    ["microdermabrasion-facial", "Skin", "Microdermabrasion with full facial (75 min)", "$110", "Adds ultrasound, iontophoresis, massage and a rubber mask."],
-    ["waxing", "Waxing", "Waxing", "$7 to $50+", "Face, back, chest, arms, legs, bikini and Brazilian."],
-  ];
-  for (const [i, [id, group, name, price, description]] of services.entries()) {
+  console.log("Services (April's 2026 price list)");
+  for (const [i, { id, group, name, price, description }] of PRICE_LIST_2026.entries()) {
     await save({
       _id: `service-${id}`,
       _type: "service",
       name,
       group,
+      price,
       order: (i + 1) * 10,
-      ...(price ? { price } : {}),
       ...(description ? { description } : {}),
     });
   }
@@ -177,9 +164,9 @@ async function main() {
   await save({
     _id: "backgrounds",
     _type: "backgrounds",
-    hero: await image("stock/hero-salon-interior_pexels-alec-adriano.jpg"),
-    clean: await image("stock/polish-wall_unsplash-h-co.jpg"),
-    visit: await image("stock/pexels-gabrielpuyen-6135677.jpg"),
+    hero: await image("from-dropbox/salon-interior-polish-wall.jpg"),
+    clean: await image("from-dropbox/salon-polish-display.jpg"),
+    visit: await image("from-dropbox/salon-polish-wall-sign.jpg"),
   });
 
   console.log("Page SEO (prices left out until April confirms them)");

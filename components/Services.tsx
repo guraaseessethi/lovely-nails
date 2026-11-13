@@ -1,19 +1,26 @@
-import type { Service, ServiceGroup } from "@/lib/types";
+import { SERVICE_GROUPS, type Service, type ServiceGroup } from "@/lib/types";
 import { AskApril } from "./AskApril";
 import styles from "./Services.module.css";
 
 const GROUP_LABELS: Record<ServiceGroup, string> = {
-  Nails: "Nails",
-  Pedicure: "Pedicures",
-  Skin: "Skin",
+  "Natural nails": "Natural nails",
+  Enhancements: "Nail enhancements and extensions",
   Waxing: "Waxing",
+  Facials: "Facials",
+  "Foot massage": "Foot massage",
+  Kids: "Children's services (10 and under)",
+};
+
+// Footnotes from the 2026 price list.
+const GROUP_NOTES: Partial<Record<ServiceGroup, string>> = {
+  Enhancements: "Prices vary with length and design.",
 };
 
 export function Services({ services, headingLevel = 2 }: { services: Service[]; headingLevel?: 1 | 2 }) {
   const Heading = headingLevel === 1 ? "h1" : "h2";
-  const groups = Object.keys(GROUP_LABELS)
-    .map((g) => ({ group: g as ServiceGroup, items: services.filter((s) => s.group === g) }))
-    .filter((g) => g.items.length > 0);
+  const groups = SERVICE_GROUPS.map((group) => ({ group, items: services.filter((s) => s.group === group) })).filter(
+    (g) => g.items.length > 0,
+  );
 
   return (
     <section id="services" aria-labelledby="services-title" className={styles.section}>
@@ -28,8 +35,8 @@ export function Services({ services, headingLevel = 2 }: { services: Service[]; 
             </Heading>
           </div>
           <p className={styles.note}>
-            Prices are a starting point. Ask about add-ons and custom designs when you call. We use OPI, CND Shellac,
-            Bio Seaweed Gel and CND Solar.
+            Prices are a starting point. Ask about add-ons and custom designs when you call. Walk-ins are welcome, but
+            appointments are highly recommended.
           </p>
         </div>
 
@@ -42,6 +49,7 @@ export function Services({ services, headingLevel = 2 }: { services: Service[]; 
           {groups.map(({ group, items }) => (
             <div key={group} className={styles.group}>
               <h3 className={`label ${styles.groupLabel}`}>{GROUP_LABELS[group]}</h3>
+              {GROUP_NOTES[group] && <p className={styles.groupNote}>{GROUP_NOTES[group]}</p>}
               <ul className={styles.list}>
                 {items.map((s) => (
                   <li key={s.id} className={styles.item}>
