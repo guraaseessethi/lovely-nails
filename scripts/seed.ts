@@ -220,7 +220,7 @@ async function main() {
 
   const photos = [];
   for (const [file, category, alt] of work) {
-    photos.push({ _key: key(), ...(await image(file, alt, { category })) });
+    photos.push({ _key: key(), ...(await image(file, alt, { categories: [category] })) });
   }
   await save({ _id: "workPhotos", _type: "workPhotos", photos: photos.reverse() });
 

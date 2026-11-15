@@ -12,6 +12,21 @@ import styles from "./WorkGallery.module.css";
 
 type Filter = "All" | WorkCategory;
 
+// Under "All", a photo in several categories is labelled with its most specific one.
+const LABEL_PRIORITY: WorkCategory[] = [
+  "Christmas & New Year",
+  "Graduation",
+  "Wedding",
+  "Theme",
+  "Seasonal",
+  "Special Occasion",
+  "Party",
+  "Ombre, French & Chrome",
+  "Simple",
+  "Everyday",
+  "Lovely Nails",
+];
+
 export function WorkGallery({ photos, headingLevel = 2 }: { photos: WorkPhoto[]; headingLevel?: 1 | 2 }) {
   const Heading = headingLevel === 1 ? "h1" : "h2";
   const [filter, setFilter] = useState<Filter>("All");
@@ -19,15 +34,17 @@ export function WorkGallery({ photos, headingLevel = 2 }: { photos: WorkPhoto[];
   const [open, setOpen] = useState<number | null>(null);
   const isPhone = useMedia("(max-width: 767px)");
   // Only offer categories that have at least one photo.
-  const filters: Filter[] = ["All", ...WORK_CATEGORIES.filter((c) => photos.some((p) => p.category === c))];
+  const filters: Filter[] = ["All", ...WORK_CATEGORIES.filter((c) => photos.some((p) => p.categories.includes(c)))];
 
   const perPage = isPhone ? 4 : 6;
-  const filtered = filter === "All" ? photos : photos.filter((p) => p.category === filter);
+  const filtered = filter === "All" ? photos : photos.filter((p) => p.categories.includes(filter));
+  const labelOf = (p: WorkPhoto) =>
+    filter === "All" ? LABEL_PRIORITY.find((c) => p.categories.includes(c)) : filter;
   const pageCount = Math.max(1, Math.ceil(filtered.length / perPage));
   const current = Math.min(page, pageCount - 1);
   const shown = filtered.slice(current * perPage, current * perPage + perPage);
 
-  const items: LightboxItem[] = filtered.map((p) => ({ ...p, title: p.caption, meta: p.category }));
+  const items: LightboxItem[] = filtered.map((p) => ({ ...p, title: p.caption, meta: labelOf(p) }));
 
   const turn = (n: number) => {
     setPage(n);
@@ -89,9 +106,9 @@ export function WorkGallery({ photos, headingLevel = 2 }: { photos: WorkPhoto[];
                     blurDataURL={p.lqip}
                     style={{ objectFit: "cover", objectPosition: p.position }}
                   />
-                  {(p.category || p.caption) && (
+                  {(labelOf(p) || p.caption) && (
                     <span className={styles.meta} aria-hidden="true">
-                      {p.category && <span className={styles.cat}>{p.category}</span>}
+                      {labelOf(p) && <span className={styles.cat}>{labelOf(p)}</span>}
                       {p.caption && <span className={styles.caption}>{p.caption}</span>}
                     </span>
                   )}

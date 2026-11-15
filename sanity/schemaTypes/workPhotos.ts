@@ -13,7 +13,7 @@ export const workPhotos = defineType({
       title: "Photos",
       type: "array",
       description:
-        "Drag a batch of photos straight onto this box to upload them all at once. Then click each one to pick its category and describe it. New uploads go to the bottom of this list and show first on the site; drag to change the order.",
+        "Drag a batch of photos straight onto this box to upload them all at once. Then click each one to tick its categories and describe it. New uploads go to the bottom of this list and show first on the site; drag to change the order.",
       options: { layout: "grid" },
       of: [
         defineArrayMember({
@@ -21,11 +21,12 @@ export const workPhotos = defineType({
           options: { hotspot: true },
           fields: [
             defineField({
-              name: "category",
-              title: "Category",
-              type: "string",
-              description: "Which filter this photo appears under on the site.",
-              options: { list: WORK_CATEGORIES, layout: "radio" },
+              name: "categories",
+              title: "Categories",
+              type: "array",
+              description: "Tick every filter this photo should appear under on the site.",
+              of: [defineArrayMember({ type: "string" })],
+              options: { list: WORK_CATEGORIES, layout: "grid" },
             }),
             defineField({
               name: "alt",
@@ -43,7 +44,8 @@ export const workPhotos = defineType({
             }),
           ],
           preview: {
-            select: { media: "asset", title: "alt", subtitle: "category" },
+            select: { media: "asset", title: "alt", categories: "categories" },
+            prepare: ({ media, title, categories }) => ({ media, title, subtitle: (categories ?? []).join(", ") }),
           },
         }),
       ],

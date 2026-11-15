@@ -1,6 +1,19 @@
 import { defineField } from "sanity";
 
-export const WORK_CATEGORIES = ["Everyday", "Ombre, French & Chrome", "Party", "Special Occasion", "Theme", "Wedding", "Graduation", "New Year", "Seasonal", "Simple", "Lovely Nails"];
+// Must match WORK_CATEGORIES in lib/types.ts.
+export const WORK_CATEGORIES = [
+  "Everyday",
+  "Simple",
+  "Ombre, French & Chrome",
+  "Special Occasion",
+  "Wedding",
+  "Graduation",
+  "Christmas & New Year",
+  "Seasonal",
+  "Theme",
+  "Party",
+  "Lovely Nails",
+];
 
 // Must match SERVICE_GROUPS in lib/types.ts.
 export const SERVICE_GROUPS = ["Natural nails", "Enhancements", "Waxing", "Facials", "Foot massage", "Kids"];

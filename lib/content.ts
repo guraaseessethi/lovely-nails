@@ -126,9 +126,9 @@ export async function getPageSeo(): Promise<PageSeo> {
  * site shows the list bottom-up. April can drag photos to change the order.
  */
 export async function getWorkPhotos(): Promise<WorkPhoto[]> {
-  type Raw = NonNullable<RawImage> & { _key: string; category?: string; caption?: string };
+  type Raw = NonNullable<RawImage> & { _key: string; categories?: string[]; category?: string; caption?: string };
   const rows = await query<Raw[] | null>(
-    `*[_id == "workPhotos"][0].photos[]{_key, category, caption, alt, crop, hotspot,
+    `*[_id == "workPhotos"][0].photos[]{_key, categories, category, caption, alt, crop, hotspot,
       "asset": asset->{_id, metadata{lqip, dimensions{width, height}}}}`,
     {},
     ["workPhotos"],
@@ -136,8 +136,10 @@ export async function getWorkPhotos(): Promise<WorkPhoto[]> {
   return [...(rows ?? [])].reverse().flatMap((r) => {
     const img = toImg(r, "Nails by Lovely Nails Spa");
     if (!img) return [];
-    const category = WORK_CATEGORIES.includes(r.category as WorkCategory) ? (r.category as WorkCategory) : undefined;
-    return [{ ...img, key: r._key, category, caption: r.caption }];
+    // `category` is the old single-choice field, still read until every photo is migrated.
+    const raw = r.categories ?? (r.category ? [r.category] : []);
+    const categories = raw.filter((c): c is WorkCategory => WORK_CATEGORIES.includes(c as WorkCategory));
+    return [{ ...img, key: r._key, categories, caption: r.caption }];
   });
 }
 

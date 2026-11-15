@@ -10,10 +10,23 @@ export type Img = {
   position?: string;
 };
 
-export const WORK_CATEGORIES = ["Everyday", "Ombre, French & Chrome", "Party", "Special Occasion", "Theme", "Wedding", "Graduation", "New Year", "Seasonal", "Simple", "Lovely Nails"] as const;
+// April's Dropbox folders, in filter order. A photo can be in several.
+export const WORK_CATEGORIES = [
+  "Everyday",
+  "Simple",
+  "Ombre, French & Chrome",
+  "Special Occasion",
+  "Wedding",
+  "Graduation",
+  "Christmas & New Year",
+  "Seasonal",
+  "Theme",
+  "Party",
+  "Lovely Nails",
+] as const;
 export type WorkCategory = (typeof WORK_CATEGORIES)[number];
 
-export type WorkPhoto = Img & { key: string; category?: WorkCategory; caption?: string };
+export type WorkPhoto = Img & { key: string; categories: WorkCategory[]; caption?: string };
 
 export type DayHours = { day: string; closed: boolean; open?: string; close?: string };
 
