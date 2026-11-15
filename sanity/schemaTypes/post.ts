@@ -35,6 +35,7 @@ export const post = defineType({
       title: "Date",
       type: "date",
       group: "post",
+      description: "The post goes live on the site on this day. Pick a future date to schedule it, then Publish.",
       initialValue: () => new Date().toISOString().slice(0, 10),
       validation: (rule) => rule.required(),
     }),

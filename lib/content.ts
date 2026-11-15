@@ -147,7 +147,23 @@ const POST_CARD = `"slug": slug.current, title, date, tag, excerpt, "cover": cov
 type RawCard = Omit<PostCard, "cover"> & { cover: RawImage };
 const toCard = (p: RawCard): PostCard => ({ ...p, cover: toImg(p.cover, p.title) });
 
+/** Today in Barrie, as "YYYY-MM-DD". */
+const torontoToday = () => new Intl.DateTimeFormat("en-CA", { timeZone: "America/Toronto" }).format(new Date());
+
+/**
+ * Scheduling: a post is live from its date onwards. Posts dated in the future are hidden
+ * everywhere (cards, pages, sitemap). Re-checked hourly, so a post appears within an hour
+ * of midnight Toronto time on its date, with no rebuild needed.
+ */
 export async function getPosts(): Promise<PostCard[]> {
+  "use cache";
+  cacheLife("hours");
+  cacheTag("post");
+  const today = torontoToday();
+  return (await getAllPosts()).filter((p) => !p.date || p.date <= today);
+}
+
+async function getAllPosts(): Promise<PostCard[]> {
   const rows = await query<RawCard[]>(
     `*[_type == "post" && defined(slug.current)] | order(date desc, _createdAt desc){${POST_CARD}}`,
     {},
@@ -167,7 +183,16 @@ export type Post = PostCard & {
   updatedAt?: string;
 };
 
+/** One live post; null if it doesn't exist or is scheduled for later. */
 export async function getPost(slug: string): Promise<Post | null> {
+  "use cache";
+  cacheLife("hours");
+  cacheTag("post");
+  const post = await getAnyPost(slug);
+  return post && (!post.date || post.date <= torontoToday()) ? post : null;
+}
+
+async function getAnyPost(slug: string): Promise<Post | null> {
   const raw = await query<(RawCard & Omit<Post, keyof PostCard>) | null>(
     `*[_type == "post" && slug.current == $slug][0]{
       ${POST_CARD}, seoTitle, seoDescription, "updatedAt": _updatedAt,
