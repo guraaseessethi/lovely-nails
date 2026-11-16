@@ -3,6 +3,7 @@ import { PortableText, type PortableTextComponents } from "next-sanity";
 import type { Post } from "@/lib/content";
 import { formatDate } from "@/lib/format";
 import { type RawImage, toImg } from "@/lib/sanity/image";
+import { BookButton } from "./BookButton";
 import styles from "./PostArticle.module.css";
 
 const components: PortableTextComponents = {
@@ -50,7 +51,19 @@ const components: PortableTextComponents = {
 };
 
 /** The post itself, shared by the modal and the full /journal/[slug] page. */
-export function PostArticle({ post, phoneE164, as = "page" }: { post: Post; phoneE164?: string; as?: "page" | "modal" }) {
+export function PostArticle({
+  post,
+  phone,
+  phoneE164,
+  email,
+  as = "page",
+}: {
+  post: Post;
+  phone?: string;
+  phoneE164?: string;
+  email?: string;
+  as?: "page" | "modal";
+}) {
   const Title = as === "page" ? "h1" : "h2";
   return (
     <article className={styles.article} aria-labelledby="post-title">
@@ -76,12 +89,8 @@ export function PostArticle({ post, phoneE164, as = "page" }: { post: Post; phon
         {post.excerpt && <p className={styles.lede}>{post.excerpt}</p>}
         <PortableText value={post.body} components={components} />
         <div className={styles.foot}>
-          <span className={styles.footNote}>Questions about this? Give us a call.</span>
-          {phoneE164 && (
-            <a href={`tel:${phoneE164}`} className="btn btnCyan">
-              Call to book
-            </a>
-          )}
+          <span className={styles.footNote}>Questions about this? Call, text or email us.</span>
+          <BookButton phone={phone} phoneE164={phoneE164} email={email} className="btn btnCyan" />
         </div>
       </div>
     </article>

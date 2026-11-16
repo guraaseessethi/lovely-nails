@@ -23,7 +23,7 @@ async function Post({ params }: { params: PageProps<"/journal/[slug]">["params"]
   const { slug } = await params;
   const [post, settings] = await Promise.all([getPost(slug), getSettings()]);
   if (!post) notFound();
-  return <PostArticle post={post} phoneE164={settings.phoneE164} />;
+  return <PostArticle post={post} phone={settings.phone} phoneE164={settings.phoneE164} email={settings.email} />;
 }
 
 export default function PostPage({ params }: PageProps<"/journal/[slug]">) {

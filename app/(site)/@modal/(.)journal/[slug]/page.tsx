@@ -15,7 +15,7 @@ export default async function PostModalPage({ params }: PageProps<"/journal/[slu
   if (!post) notFound();
   return (
     <PostModal title={post.title}>
-      <PostArticle post={post} phoneE164={settings.phoneE164} as="modal" />
+      <PostArticle post={post} phone={settings.phone} phoneE164={settings.phoneE164} email={settings.email} as="modal" />
     </PostModal>
   );
 }

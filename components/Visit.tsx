@@ -2,6 +2,7 @@ import Image from "next/image";
 import { groupHours } from "@/lib/hours";
 import type { DayHours, Img, Settings } from "@/lib/types";
 import { AskApril } from "./AskApril";
+import { BookButton } from "./BookButton";
 import styles from "./Visit.module.css";
 
 export function mapQuery(s: Settings) {
@@ -109,11 +110,7 @@ export function Visit({ settings, hours, background }: Props) {
           </dl>
 
           <div className="btnRow">
-            {settings.phoneE164 && (
-              <a href={`tel:${settings.phoneE164}`} className="btn btnCyan">
-                Call to book
-              </a>
-            )}
+            <BookButton phone={settings.phone} phoneE164={settings.phoneE164} email={settings.email} className="btn btnCyan" />
             {hasAddress && (
               <a href={directionsUrl(settings)} className="btn btnOutline" rel="noopener" target="_blank">
                 Get directions

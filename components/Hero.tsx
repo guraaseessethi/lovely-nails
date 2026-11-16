@@ -1,5 +1,6 @@
 import Image from "next/image";
 import type { DayHours, Img, Notice, Settings } from "@/lib/types";
+import { BookButton } from "./BookButton";
 import { Header } from "./Header";
 import { ScrollLink } from "./ScrollLink";
 import styles from "./Hero.module.css";
@@ -52,15 +53,24 @@ export function Hero({ settings, hours, showJournal, background, notice }: Props
           <br />
           since {settings.since ?? 2008}.
         </h1>
-        <p className={styles.lede}>
-          Gel, shellac, nail art and pedicures in a clean, calm salon. The whole family is welcome.
-        </p>
+        <div className={styles.lede}>
+          <p className={styles.ledeTitle}>Family Nail &amp; Beauty Care</p>
+          <ul className={styles.services}>
+            <li>Nail Extensions: Solar / Builder Bio Gel</li>
+            <li>Pedicure</li>
+            <li>Shellac Gel Manicure</li>
+            <li>Waxing</li>
+            <li>Facial</li>
+            <li>Foot Massage</li>
+          </ul>
+        </div>
         <div className="btnRow">
-          {settings.phoneE164 && (
-            <a href={`tel:${settings.phoneE164}`} className={`btn btnCyan ${styles.cta}`}>
-              Call to book
-            </a>
-          )}
+          <BookButton
+            phone={settings.phone}
+            phoneE164={settings.phoneE164}
+            email={settings.email}
+            className={`btn btnCyan ${styles.cta}`}
+          />
           <ScrollLink to="services" className={`btn btnOutlineLight ${styles.cta}`}>
             View the menu
           </ScrollLink>

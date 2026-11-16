@@ -28,6 +28,13 @@ const paths = {
     </>
   ),
   arrowUpRight: <path d="M7 17L17 7M8 7h9v9" />,
+  message: <path d="M21 12a8 8 0 0 1-11.6 7.1L4 20.5l1.4-4.6A8 8 0 1 1 21 12z" />,
+  mail: (
+    <>
+      <rect x="3" y="5" width="18" height="14" rx="3" />
+      <path d="M4 7l8 6 8-6" />
+    </>
+  ),
 };
 
 export type IconName = keyof typeof paths;
