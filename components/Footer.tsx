@@ -29,8 +29,8 @@ export function Footer({ settings, year }: { settings: Settings; year: number })
           © {year} {settings.businessName}
           {city && ` · ${city}`}
           <span className={styles.credit}>
-            Designed by{" "}
-            <a href="https://koohtstudios.vercel.app" target="_blank" rel="noopener">
+            Made by{" "}
+            <a href="https://koohtstudios.vercel.app/" target="_blank" rel="noopener">
               Kooht Studio
             </a>
           </span>
