@@ -3,7 +3,7 @@ import { Hero } from "@/components/Hero";
 import { Highlights } from "@/components/Highlights";
 import { InstagramStrip } from "@/components/InstagramStrip";
 import { Journal } from "@/components/Journal";
-import { MeetApril } from "@/components/MeetApril";
+import { APRIL_STORY_SLUG, MeetApril } from "@/components/MeetApril";
 import { Mission } from "@/components/Mission";
 import { Reviews } from "@/components/Reviews";
 import { Services } from "@/components/Services";
@@ -44,6 +44,7 @@ export default async function HomePage() {
     getYear(),
   ]);
   const showJournal = posts.length > 0;
+  const storyHref = posts.some((p) => p.slug === APRIL_STORY_SLUG) ? `/journal/${APRIL_STORY_SLUG}` : undefined;
 
   return (
     <main>
@@ -53,7 +54,7 @@ export default async function HomePage() {
       />
       <Hero settings={settings} hours={hours} showJournal={showJournal} background={backgrounds.hero} notice={notice} />
       <Highlights settings={settings} />
-      <MeetApril about={about} settings={settings} />
+      <MeetApril about={about} settings={settings} storyHref={storyHref} />
       <Mission settings={settings} year={year} />
       <Services services={services} />
       <CleanBand background={backgrounds.clean} />

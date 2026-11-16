@@ -1,9 +1,13 @@
 import Image from "next/image";
+import Link from "next/link";
 import type { About, Settings } from "@/lib/types";
 import { AskApril } from "./AskApril";
 import styles from "./MeetApril.module.css";
 
-export function MeetApril({ about, settings }: { about: About; settings: Settings }) {
+/** Slug of April's full letter in the Journal; the button shows only once that post is published. */
+export const APRIL_STORY_SLUG = "the-heart-behind-lovely-nails";
+
+export function MeetApril({ about, settings, storyHref }: { about: About; settings: Settings; storyHref?: string }) {
   return (
     <section id="april" aria-labelledby="april-title" className={styles.section}>
       <div className={`container ${styles.grid}`}>
@@ -40,6 +44,13 @@ export function MeetApril({ about, settings }: { about: About; settings: Setting
             )}
           </p>
           {about.secondParagraph && <p className="body">{about.secondParagraph}</p>}
+          {storyHref && (
+            <div>
+              <Link href={storyHref} scroll={false} className="btn btnOutline">
+                Read April&rsquo;s story
+              </Link>
+            </div>
+          )}
         </div>
       </div>
     </section>
