@@ -189,7 +189,9 @@ async function fetchFeed(exclude: string[], hashtag?: string): Promise<Instagram
   cacheLife({ stale: 3600, revalidate: 43200, expire: 172800 });
   cacheTag("instagram");
 
-  const token = process.env.INSTAGRAM_ACCESS_TOKEN || (await readToken())?.token;
+  // Trim stray spaces or quotes pasted into the Vercel setting.
+  const envToken = process.env.INSTAGRAM_ACCESS_TOKEN?.trim().replace(/^["']|["']$/g, "");
+  const token = envToken || (await readToken())?.token;
   if (!token) return [];
   const data = await fetchMedia(token);
   const tag = hashtag?.replace(/^#/, "").toLowerCase();

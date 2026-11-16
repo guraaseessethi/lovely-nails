@@ -17,7 +17,7 @@ const SMS_BODY = "Hi Lovely Nails, I'd like to book an appointment for ";
 const EMAIL_SUBJECT = "Appointment request";
 const EMAIL_BODY = "Hi Lovely Nails,\n\nI'd like to book:\nService:\nPreferred day and time:\nName:\nPhone:\n\nThank you!";
 
-/** "Book now" button that opens a bottom sheet (same style as the mobile menu) with Call, Text and Email. */
+/** "Book now" button: Call, Text and Email in a bottom sheet on phones (like the menu) and a pop-up on wider screens. */
 export function BookButton({ phone, phoneE164, email, className, label = "Book now" }: Props) {
   const [open, setOpen] = useState(false);
   const sheet = useRef<HTMLDivElement>(null);

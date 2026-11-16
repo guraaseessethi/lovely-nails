@@ -1,4 +1,4 @@
-/* Matches the mobile menu sheet (MobileNav.module.css), on every screen size. */
+/* Phones: a bottom sheet matching the mobile menu (MobileNav.module.css). Wider screens: a pop-up. */
 .backdrop {
   position: fixed;
   inset: 0;
@@ -131,6 +131,37 @@
 @keyframes rise {
   from {
     transform: translateY(100%);
+  }
+}
+
+/* Tablets and desktop: a centered pop-up instead of the phone bottom sheet. */
+@media (min-width: 768px) {
+  .backdrop {
+    align-items: center;
+    padding: 24px;
+  }
+
+  .sheet {
+    max-width: 460px;
+    padding: 28px 32px 24px;
+    border-radius: 28px;
+    box-shadow: 0 24px 60px rgba(17, 17, 17, 0.25);
+    animation: pop 0.24s var(--ease);
+  }
+
+  .handle {
+    display: none;
+  }
+
+  .list li:last-child .item {
+    border-bottom: 0;
+  }
+}
+
+@keyframes pop {
+  from {
+    opacity: 0;
+    transform: translateY(12px) scale(0.97);
   }
 }
 
