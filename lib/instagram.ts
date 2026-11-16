@@ -6,10 +6,11 @@ import { getSettings } from "./content";
 import type { InstagramPost } from "./types";
 
 // Two sources, in order:
-// 1. Behold (behold.so): April connected her account there; the feed below is public JSON with
-//    image links that don't expire. Override with INSTAGRAM_FEED_URL, or set it to "" to turn off.
-// 2. Instagram API with Instagram Login (see README). The long-lived token lives in Vercel
-//    Edge Config under one key, never in Sanity or git.
+// 1. Instagram API: INSTAGRAM_ACCESS_TOKEN (Vercel env var, a never-expiring token from Meta's
+//    "Unified login" setup), or the older connect flow's token in Vercel Edge Config. Never in
+//    Sanity or git. Shows up to 12 of her latest photo posts.
+// 2. Behold (behold.so), as a fallback: public JSON with a few recent posts and image links that
+//    don't expire. Override with INSTAGRAM_FEED_URL, or set it to "" to turn off.
 const BEHOLD_FEED = process.env.INSTAGRAM_FEED_URL ?? "https://feeds.behold.so/b6mil0x9ivXmCrpHai4K";
 
 const GRAPH = "https://graph.instagram.com";
@@ -159,18 +160,38 @@ async function fetchBehold(url: string, exclude: string[], hashtag?: string): Pr
     .slice(0, 12);
 }
 
+const MEDIA_FIELDS = "id,caption,media_type,media_url,permalink,children{media_type,media_url}";
+// April's Instagram professional account ID (public, shown in Meta's dashboard).
+const IG_USER_ID = process.env.INSTAGRAM_USER_ID ?? "17841456669860981";
+
+/**
+ * Asks Instagram for the latest media with a token. Tokens from Meta's newer "Unified login"
+ * (INSTAGRAM_ACCESS_TOKEN, a never-expiring system-user token) may work on either API host,
+ * so both are tried; the Edge Config token from the older connect flow uses graph.instagram.com.
+ */
+async function fetchMedia(token: string): Promise<Media[]> {
+  const q = new URLSearchParams({ fields: MEDIA_FIELDS, limit: "40", access_token: token });
+  const urls = [`${GRAPH}/me/media?${q}`, `https://graph.facebook.com/${IG_USER_ID}/media?${q}`];
+  let lastError: unknown;
+  for (const url of urls) {
+    try {
+      return (await igJson<{ data: Media[] }>(url)).data;
+    } catch (err) {
+      lastError = err;
+    }
+  }
+  throw lastError;
+}
+
 async function fetchFeed(exclude: string[], hashtag?: string): Promise<InstagramPost[]> {
   "use cache";
   // Instagram's CDN links expire after a few days, so never keep them long.
   cacheLife({ stale: 3600, revalidate: 43200, expire: 172800 });
   cacheTag("instagram");
 
-  const stored = await readToken();
-  if (!stored) return [];
-  const fields = "id,caption,media_type,media_url,permalink,children{media_type,media_url}";
-  const { data } = await igJson<{ data: Media[] }>(
-    `${GRAPH}/me/media?${new URLSearchParams({ fields, limit: "40", access_token: stored.token })}`,
-  );
+  const token = process.env.INSTAGRAM_ACCESS_TOKEN || (await readToken())?.token;
+  if (!token) return [];
+  const data = await fetchMedia(token);
   const tag = hashtag?.replace(/^#/, "").toLowerCase();
 
   return data
@@ -189,12 +210,24 @@ async function fetchFeed(exclude: string[], hashtag?: string): Promise<Instagram
 
 /** Latest photo posts, or [] if Instagram isn't connected or the API fails. Never throws. */
 export async function getInstagramPosts(): Promise<InstagramPost[]> {
+  let settings: Awaited<ReturnType<typeof getSettings>>;
   try {
-    const settings = await getSettings();
-    if (BEHOLD_FEED) return await fetchBehold(BEHOLD_FEED, settings.instagramExclude, settings.instagramHashtag);
-    return await fetchFeed(settings.instagramExclude, settings.instagramHashtag);
+    settings = await getSettings();
+  } catch {
+    return [];
+  }
+  // Her own token first (every post), then Behold (a few recent posts) if that's missing or fails.
+  try {
+    const posts = await fetchFeed(settings.instagramExclude, settings.instagramHashtag);
+    if (posts.length > 0) return posts;
   } catch (err) {
-    console.error("Instagram feed unavailable:", err instanceof Error ? err.message : err);
+    console.error("Instagram API feed unavailable:", err instanceof Error ? err.message : err);
+  }
+  if (!BEHOLD_FEED) return [];
+  try {
+    return await fetchBehold(BEHOLD_FEED, settings.instagramExclude, settings.instagramHashtag);
+  } catch (err) {
+    console.error("Behold feed unavailable:", err instanceof Error ? err.message : err);
     return [];
   }
 }
