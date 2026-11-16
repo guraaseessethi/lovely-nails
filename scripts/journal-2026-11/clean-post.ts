@@ -49,7 +49,7 @@ Anything disposable is used only once and safely thrown away after your service.
 
 Beyond each appointment, our team follows consistent cleaning and sanitation routines throughout the day, so the whole salon stays clean, safe and welcoming, not just your chair.
 
-![salon-polish-display.jpg|Polish display stands on the counter at Lovely Nails Spa|The polish counter at our salon on Burton Ave.]
+![salon-sink-towel-warmers.jpg|Hand-washing sink and towel warmers beside the polish wall at Lovely Nails Spa|Our hand-washing sink and towel warmers, beside the polish wall.]
 
 ## What to look for in any nail salon
 
