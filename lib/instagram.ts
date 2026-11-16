@@ -170,7 +170,7 @@ const IG_USER_ID = process.env.INSTAGRAM_USER_ID ?? "17841456669860981";
  * so both are tried; the Edge Config token from the older connect flow uses graph.instagram.com.
  */
 async function fetchMedia(token: string): Promise<Media[]> {
-  const q = new URLSearchParams({ fields: MEDIA_FIELDS, limit: "40", access_token: token });
+  const q = new URLSearchParams({ fields: MEDIA_FIELDS, limit: "100", access_token: token });
   const urls = [`${GRAPH}/me/media?${q}`, `https://graph.facebook.com/${IG_USER_ID}/media?${q}`];
   let lastError: unknown;
   for (const url of urls) {

@@ -32,7 +32,7 @@ export function InstagramStrip({ posts, profileUrl }: { posts: InstagramPost[]; 
           {posts.map((p, i) => (
             <li key={p.id}>
               <button type="button" className={styles.tile} aria-label={`Open Instagram photo: ${p.alt}`} onClick={() => setOpen(i)}>
-                <Image src={p.src} alt={p.alt} fill unoptimized sizes="236px" style={{ objectFit: "cover" }} />
+                <Image src={p.src} alt={p.alt} fill unoptimized sizes="(min-width: 1024px) 25vw, (min-width: 768px) 33vw, 50vw" style={{ objectFit: "cover" }} />
               </button>
             </li>
           ))}
