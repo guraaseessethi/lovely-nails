@@ -48,7 +48,7 @@ export function Hero({ settings, hours, showJournal, background, notice }: Props
         <h1 className={styles.title}>
           Lovely Nails Spa.
           <br />
-          <span className={styles.accent}>Barrie&rsquo;s nail spa</span>
+          <span className={styles.accent}>Barrie&rsquo;s nail salon</span>
           <br />
           since {settings.since ?? 2008}.
         </h1>

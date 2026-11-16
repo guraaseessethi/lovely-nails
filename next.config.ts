@@ -9,7 +9,7 @@ const siteCsp = [
   "default-src 'self'",
   `script-src 'self' 'unsafe-inline'${isDev ? " 'unsafe-eval'" : ""}`,
   "style-src 'self' 'unsafe-inline'",
-  "img-src 'self' data: blob: https://cdn.sanity.io https://*.cdninstagram.com https://*.fbcdn.net",
+  "img-src 'self' data: blob: https://cdn.sanity.io https://*.cdninstagram.com https://*.fbcdn.net https://behold.pictures https://*.behold.pictures",
   "font-src 'self'",
   `connect-src 'self'${isDev ? " ws:" : ""}`,
   "frame-src https://www.google.com https://maps.google.com",

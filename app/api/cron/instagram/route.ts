@@ -15,7 +15,11 @@ export async function GET(req: NextRequest) {
   }
 
   const stored = await readToken();
-  if (!stored) return Response.json({ connected: false });
+  if (!stored) {
+    // Behold feeds need no token: just pick up new posts.
+    revalidateTag("instagram", { expire: 0 });
+    return Response.json({ connected: false, refreshedFeed: true });
+  }
 
   let refreshed = false;
   if (Date.now() - stored.refreshedAt > DAY) {

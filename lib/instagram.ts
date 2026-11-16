@@ -5,8 +5,12 @@ import { createClient, parseConnectionString } from "@vercel/edge-config";
 import { getSettings } from "./content";
 import type { InstagramPost } from "./types";
 
-// Instagram API with Instagram Login. The long-lived token lives in Vercel
-// Edge Config under one key, never in Sanity or git.
+// Two sources, in order:
+// 1. Behold (behold.so): April connected her account there; the feed below is public JSON with
+//    image links that don't expire. Override with INSTAGRAM_FEED_URL, or set it to "" to turn off.
+// 2. Instagram API with Instagram Login (see README). The long-lived token lives in Vercel
+//    Edge Config under one key, never in Sanity or git.
+const BEHOLD_FEED = process.env.INSTAGRAM_FEED_URL ?? "https://feeds.behold.so/b6mil0x9ivXmCrpHai4K";
 
 const GRAPH = "https://graph.instagram.com";
 const KEY = "instagram";
@@ -106,7 +110,7 @@ function altFrom(caption?: string) {
 }
 
 /** Matches an excluded entry given as a media ID or as a post link. */
-function isExcluded(m: Media, exclude: string[]) {
+function isExcluded(m: { id: string; permalink: string }, exclude: string[]) {
   return exclude.some((raw) => {
     const e = raw.trim();
     if (!e) return false;
@@ -114,6 +118,45 @@ function isExcluded(m: Media, exclude: string[]) {
     const code = e.match(/instagram\.com\/(?:p|reel)\/([^/?#]+)/)?.[1];
     return Boolean(code && m.permalink.includes(`/${code}`));
   });
+}
+
+type BeholdSize = { width: number; height: number; mediaUrl: string };
+type BeholdPost = {
+  id: string;
+  permalink: string;
+  mediaType: "IMAGE" | "VIDEO" | "CAROUSEL_ALBUM";
+  caption?: string;
+  prunedCaption?: string;
+  hashtags?: string[];
+  sizes?: { medium?: BeholdSize; large?: BeholdSize };
+};
+
+async function fetchBehold(url: string, exclude: string[], hashtag?: string): Promise<InstagramPost[]> {
+  "use cache";
+  cacheLife({ stale: 3600, revalidate: 21600, expire: 172800 });
+  cacheTag("instagram");
+
+  const { posts } = await igJson<{ posts: BeholdPost[] }>(url);
+  const tag = hashtag?.replace(/^#/, "").toLowerCase();
+  return posts
+    .filter((p) => p.mediaType !== "VIDEO" && !isExcluded(p, exclude))
+    .filter((p) => !tag || (p.hashtags ?? []).some((h) => h.toLowerCase() === tag))
+    .flatMap((p) => {
+      const size = p.sizes?.medium ?? p.sizes?.large;
+      if (!size) return [];
+      return [
+        {
+          id: p.id,
+          src: size.mediaUrl,
+          alt: altFrom(p.prunedCaption ?? p.caption),
+          width: size.width,
+          height: size.height,
+          permalink: p.permalink,
+          caption: p.prunedCaption ?? p.caption,
+        },
+      ];
+    })
+    .slice(0, 12);
 }
 
 async function fetchFeed(exclude: string[], hashtag?: string): Promise<InstagramPost[]> {
@@ -148,6 +191,7 @@ async function fetchFeed(exclude: string[], hashtag?: string): Promise<Instagram
 export async function getInstagramPosts(): Promise<InstagramPost[]> {
   try {
     const settings = await getSettings();
+    if (BEHOLD_FEED) return await fetchBehold(BEHOLD_FEED, settings.instagramExclude, settings.instagramHashtag);
     return await fetchFeed(settings.instagramExclude, settings.instagramHashtag);
   } catch (err) {
     console.error("Instagram feed unavailable:", err instanceof Error ? err.message : err);
