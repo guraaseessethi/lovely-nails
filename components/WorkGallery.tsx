@@ -20,7 +20,6 @@ const LABEL_PRIORITY: WorkCategory[] = [
   "Theme",
   "Seasonal",
   "Special Occasion",
-  "Party",
   "Ombre, French & Chrome",
   "Simple",
   "Everyday",

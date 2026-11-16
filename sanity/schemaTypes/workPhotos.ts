@@ -29,6 +29,14 @@ export const workPhotos = defineType({
               options: { list: WORK_CATEGORIES, layout: "grid" },
             }),
             defineField({
+              name: "salon",
+              title: "Photo of the salon",
+              type: "boolean",
+              description:
+                "Switch on for photos of the salon itself (not nails). These appear on the \"Step into Lovely Nails\" page.",
+              initialValue: false,
+            }),
+            defineField({
               name: "alt",
               title: "Describe the photo",
               type: "string",

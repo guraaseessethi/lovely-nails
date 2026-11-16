@@ -197,14 +197,14 @@ async function main() {
   // (newest uploads first), so the array is reversed before saving.
   const work: [string, string, string][] = [
     // file, category, alt. Categories are April's list (Nov 2026); she can change any of them in the Studio.
-    ["from-april/ombre-orange-pink-almond.jpg", "Party", "Orange to hot pink ombre on almond nails"],
+    ["from-april/ombre-orange-pink-almond.jpg", "Ombre, French & Chrome", "Orange to hot pink ombre on almond nails"],
     ["from-april/milky-white-gold-flake.jpg", "Special Occasion", "Milky white gel with gold flakes on oval nails"],
     ["from-april/french-tips-almond.jpg", "Wedding", "Classic white French tips on almond nails"],
     ["from-april/sheer-pink-square.jpg", "Simple", "Sheer pink on long square nails"],
     ["from-april/lavender-short-gel.jpg", "Everyday", "Pastel lavender gel on short rounded nails"],
     ["from-old-site/old-site-ALE9798.jpg", "Wedding", "Pedicure with white-tipped toes resting on a towel beside a yellow rose"],
     ["from-old-site/old-site-ALE9757.jpg", "Special Occasion", "Pink-to-white ombre on long almond nails"],
-    ["from-old-site/old-site-ALE9741.jpg", "Party", "Deep burgundy polish on long almond nails"],
+    ["from-old-site/old-site-ALE9741.jpg", "Everyday", "Deep burgundy polish on long almond nails"],
     ["from-old-site/old-site-ALE9754.jpg", "Simple", "Sheer pink polish on natural nails"],
     ["from-old-site/old-site-ALE9762.jpg", "Simple", "Short natural nails holding a yellow rose"],
     ["from-old-site/old-site-ALE9767.jpg", "Everyday", "Burgundy polish on short nails, hands crossed"],

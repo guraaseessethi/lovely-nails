@@ -1,0 +1,78 @@
+.section {
+  background: var(--white);
+}
+
+.inner {
+  display: flex;
+  flex-direction: column;
+  gap: 36px;
+}
+
+.intro {
+  max-width: 52ch;
+}
+
+/* Masonry: photos keep their own shape, so wide room shots and tall ones sit together. */
+.wall {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  columns: 2;
+  column-gap: 14px;
+}
+
+.item {
+  break-inside: avoid;
+  margin-bottom: 14px;
+}
+
+.tile {
+  position: relative;
+  display: block;
+  width: 100%;
+  padding: 0;
+  border: 0;
+  border-radius: 20px;
+  overflow: hidden;
+  background: var(--sand);
+  cursor: zoom-in;
+}
+
+.photo {
+  width: 100%;
+  height: auto;
+  transition: transform 0.5s var(--ease);
+}
+
+.tile:hover .photo {
+  transform: scale(1.03);
+}
+
+.caption {
+  position: absolute;
+  inset: auto 0 0 0;
+  padding: 48px 16px 16px;
+  text-align: left;
+  font-family: var(--serif);
+  font-size: 22px;
+  line-height: 1.2;
+  color: var(--white);
+  background: linear-gradient(to top, rgba(17, 17, 17, 0.62), rgba(17, 17, 17, 0));
+}
+
+@media (min-width: 768px) {
+  .wall {
+    columns: 3;
+    column-gap: 18px;
+  }
+
+  .item {
+    margin-bottom: 18px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .photo {
+    transition: none;
+  }
+}

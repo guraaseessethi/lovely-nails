@@ -11,7 +11,6 @@ export const WORK_CATEGORIES = [
   "Christmas & New Year",
   "Seasonal",
   "Theme",
-  "Party",
   "Lovely Nails",
 ];
 

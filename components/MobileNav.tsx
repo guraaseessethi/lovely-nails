@@ -1,9 +1,10 @@
 "use client";
 
+import Link from "next/link";
 import { useCallback, useRef, useState } from "react";
 import { useDialog } from "@/lib/useDialog";
 import { Icon } from "./Icon";
-import { Logo } from "./Header";
+import { Logo, SALON_PAGE } from "./Header";
 import { ScrollLink } from "./ScrollLink";
 import styles from "./MobileNav.module.css";
 
@@ -85,6 +86,12 @@ export function MobileNav({ phoneE164, hoursSummary, instagram, facebook, showJo
                   </ScrollLink>
                 </li>
               ))}
+              <li>
+                <Link href={SALON_PAGE.href} className={styles.item} onClick={close}>
+                  {SALON_PAGE.label}
+                  <Icon name="right" />
+                </Link>
+              </li>
             </ul>
             <div className={styles.meta}>
               {instagram && (

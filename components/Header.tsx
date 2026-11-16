@@ -1,3 +1,4 @@
+import Link from "next/link";
 import type { DayHours } from "@/lib/types";
 import { ScrollLink } from "./ScrollLink";
 import { TodayPill } from "./TodayPill";
@@ -11,6 +12,9 @@ export const SECTIONS = [
   { id: "journal", label: "Journal" },
   { id: "visit", label: "Visit" },
 ] as const;
+
+/** The salon photo page: a page of its own, not a homepage section. */
+export const SALON_PAGE = { href: "/salon", label: "Step into Lovely Nails" } as const;
 
 type Props = {
   phone?: string;
@@ -47,6 +51,9 @@ export function Header({ phone, phoneE164, hours, showJournal, variant = "overla
               {s.label}
             </ScrollLink>
           ))}
+          <Link href={SALON_PAGE.href} className={styles.navLink}>
+            {SALON_PAGE.label}
+          </Link>
         </nav>
         {phoneE164 && (
           <a href={`tel:${phoneE164}`} className={styles.phone}>

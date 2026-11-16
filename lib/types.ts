@@ -21,12 +21,17 @@ export const WORK_CATEGORIES = [
   "Christmas & New Year",
   "Seasonal",
   "Theme",
-  "Party",
   "Lovely Nails",
 ] as const;
 export type WorkCategory = (typeof WORK_CATEGORIES)[number];
 
-export type WorkPhoto = Img & { key: string; categories: WorkCategory[]; caption?: string };
+export type WorkPhoto = Img & {
+  key: string;
+  categories: WorkCategory[];
+  caption?: string;
+  /** A photo of the salon itself, shown on the "Step into Lovely Nails" page. */
+  salon?: boolean;
+};
 
 export type DayHours = { day: string; closed: boolean; open?: string; close?: string };
 
@@ -84,6 +89,6 @@ export type PostCard = {
 };
 
 export type SeoEntry = { title?: string; description?: string; image?: Img };
-export type PageSeo = Partial<Record<"home" | "services" | "work" | "journal", SeoEntry>>;
+export type PageSeo = Partial<Record<"home" | "services" | "work" | "salon" | "journal", SeoEntry>>;
 
 export type InstagramPost = Img & { id: string; permalink: string; caption?: string };

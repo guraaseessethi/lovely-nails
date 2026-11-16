@@ -26,6 +26,11 @@ const DEFAULTS: Record<keyof PageSeo, { title: string; description: string; path
     description: "Real sets from our Burton Ave salon: gel, shellac, ombre, nail art and pedicures.",
     path: "/work",
   },
+  salon: {
+    title: "Step into Lovely Nails | Salon Photos | Lovely Nails Spa Barrie",
+    description: "A look around our Burton Ave salon in Barrie before you visit.",
+    path: "/salon",
+  },
   journal: {
     title: "Nail Care Tips from Our Barrie Salon | Lovely Nails Spa",
     description: "Aftercare, trends and salon news from April and the team.",
