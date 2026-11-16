@@ -31,7 +31,7 @@ export function MobileNav({ phoneE164, hoursSummary, instagram, facebook, showJo
 
   return (
     <>
-      <nav aria-label="Quick links" className={styles.bar}>
+      <nav aria-label="Quick links" className={styles.bar} data-mobile-bar>
         <ScrollLink to="services" className={styles.tab}>
           <Icon name="polish" size={22} />
           Services

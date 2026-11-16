@@ -1,0 +1,152 @@
+/* The QR code page: one centered column over the salon photo, styled like the homepage hero. */
+.page {
+  position: relative;
+  min-height: 100svh;
+  background: var(--espresso);
+  color: var(--white);
+  display: flex;
+  justify-content: center;
+  overflow: hidden;
+}
+
+/* No floating tab bar on this page: the buttons here do that job. */
+:global(body:has([data-links-page]) [data-mobile-bar]) {
+  display: none;
+}
+
+.bg {
+  object-fit: cover;
+}
+
+.overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom, rgba(17, 17, 17, 0.55), rgba(17, 17, 17, 0.82));
+}
+
+.inner {
+  position: relative;
+  width: 100%;
+  max-width: 480px;
+  padding: 64px 20px calc(48px + env(safe-area-inset-bottom));
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  text-align: center;
+}
+
+.tagline {
+  font-family: var(--serif);
+  font-style: italic;
+  font-weight: 500;
+  font-size: 22px;
+  color: var(--sky);
+}
+
+.title {
+  margin-top: 4px;
+  font-family: var(--serif);
+  font-weight: 500;
+  font-size: 46px;
+  line-height: 1.05;
+}
+
+.dot {
+  color: var(--cyan);
+}
+
+.sub {
+  margin: 12px 0 28px;
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--sand);
+}
+
+.book {
+  width: 100%;
+  min-height: 58px;
+  font-size: 15px;
+}
+
+.list {
+  list-style: none;
+  margin: 14px 0 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.link {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  min-height: 70px;
+  padding: 10px 18px 10px 12px;
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.94);
+  color: var(--black);
+  text-align: left;
+  text-decoration: none;
+  transition: background-color 0.2s, transform 0.2s;
+}
+
+.link:hover {
+  background: var(--white);
+  color: var(--black);
+  transform: translateY(-1px);
+}
+
+.link > svg {
+  margin-left: auto;
+  flex: none;
+  color: var(--mocha);
+}
+
+.icon {
+  flex: none;
+  width: 46px;
+  height: 46px;
+  border-radius: 999px;
+  background: var(--pale);
+  color: var(--black);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.text {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.label {
+  font-family: var(--serif);
+  font-size: 23px;
+  line-height: 1.15;
+}
+
+.detail {
+  font-size: 13px;
+  color: var(--mocha);
+  overflow-wrap: anywhere;
+}
+
+.hours {
+  margin-top: 26px;
+  font-size: 13px;
+  color: var(--sand);
+}
+
+@media (min-width: 768px) {
+  .inner {
+    padding-top: 96px;
+  }
+
+  .title {
+    font-size: 56px;
+  }
+}
