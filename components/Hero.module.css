@@ -51,13 +51,23 @@
   font-size: 12px;
   letter-spacing: 0.26em;
   text-transform: uppercase;
+  font-weight: 500;
 }
 
 .title {
   font-family: var(--serif);
-  font-weight: 300;
-  font-size: clamp(54px, 7.6vw, 116px);
+  font-weight: 500;
+  font-size: clamp(50px, 7.2vw, 110px);
   line-height: 0.95;
+}
+
+.tagline {
+  margin-bottom: -8px;
+  font-family: var(--serif);
+  font-style: italic;
+  font-weight: 500;
+  font-size: clamp(24px, 2.6vw, 34px);
+  color: var(--sky);
 }
 
 .accent {
@@ -68,6 +78,7 @@
 .lede {
   max-width: 500px;
   font-size: 17px;
+  font-weight: 400;
   line-height: 1.75;
   color: var(--sand);
 }

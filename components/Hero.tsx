@@ -44,8 +44,9 @@ export function Hero({ settings, hours, showJournal, background, notice }: Props
         <p className={styles.kicker}>
           {settings.street ?? "Burton Ave"} · {settings.city ?? "Barrie"}
         </p>
+        <p className={styles.tagline}>Hey, where did you get those&hellip;</p>
         <h1 className={styles.title}>
-          Lovely Nails.
+          Lovely Nails Spa.
           <br />
           <span className={styles.accent}>Barrie&rsquo;s nail spa</span>
           <br />

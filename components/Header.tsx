@@ -21,10 +21,11 @@ type Props = {
   variant?: "overlay" | "solid";
 };
 
-export function Logo({ className }: { className?: string }) {
+/** `tagline` off in the header: on the homepage the line sits in the hero instead. */
+export function Logo({ className, tagline = true }: { className?: string; tagline?: boolean }) {
   return (
     <span className={`${styles.lockup} ${className ?? ""}`}>
-      <span className={styles.tagline}>Hey, where did you get those&hellip;</span>
+      {tagline && <span className={styles.tagline}>Hey, where did you get those&hellip;</span>}
       <span>
         Lovely Nails Spa<span className={styles.dot}>.</span>
       </span>
@@ -38,7 +39,7 @@ export function Header({ phone, phoneE164, hours, showJournal, variant = "overla
     <header className={`${styles.header} ${variant === "solid" ? styles.solid : ""} onDark`}>
       <div className={styles.inner}>
         <ScrollLink to="top" className={styles.logo} aria-label="Lovely Nails Spa, back to top">
-          <Logo />
+          <Logo tagline={false} />
         </ScrollLink>
         <nav aria-label="Main" className={styles.nav}>
           {links.map((s) => (
