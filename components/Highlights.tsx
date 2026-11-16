@@ -15,7 +15,7 @@ export function Highlights({ settings }: { settings: Settings }) {
         </li>
         <li className={styles.sky}>Walk-ins welcome</li>
         <li>Kids to seniors</li>
-        <li className={styles.sky}>Sanitized tools, every client</li>
+        <li className={styles.sky}>Medical-grade sterilization equipment</li>
       </ul>
     </section>
   );
