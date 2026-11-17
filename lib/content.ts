@@ -143,6 +143,11 @@ export async function getWorkPhotos(): Promise<WorkPhoto[]> {
   });
 }
 
+/** Nail photos for the gallery: everything except photos marked as photos of the salon. */
+export async function getNailPhotos(): Promise<WorkPhoto[]> {
+  return (await getWorkPhotos()).filter((p) => !p.salon);
+}
+
 const POST_CARD = `"slug": slug.current, title, date, tag, excerpt, "cover": coverImage${IMAGE}`;
 type RawCard = Omit<PostCard, "cover"> & { cover: RawImage };
 const toCard = (p: RawCard): PostCard => ({ ...p, cover: toImg(p.cover, p.title) });

@@ -18,7 +18,7 @@ import {
   getReviews,
   getServices,
   getSettings,
-  getWorkPhotos,
+  getNailPhotos,
   getYear,
 } from "@/lib/content";
 import { getInstagramPosts } from "@/lib/instagram";
@@ -39,7 +39,7 @@ export default async function HomePage() {
     getAbout(),
     getServices(),
     getReviews(),
-    getWorkPhotos(),
+    getNailPhotos(),
     getInstagramPosts(),
     getYear(),
   ]);

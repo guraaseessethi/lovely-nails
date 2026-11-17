@@ -8,14 +8,8 @@ export async function generateMetadata() {
 }
 
 export default async function SalonPage() {
-  const all = await getWorkPhotos();
-  // Photos of the salon itself: the ones switched on as "Photo of the salon" in the Studio.
-  const marked = all.filter((p) => p.salon);
-  // Until any are switched on, use the photos ticked "Lovely Nails" and nothing else:
-  // the salon shots carry no nail category, while nail sets do.
-  const photos = marked.length
-    ? marked
-    : all.filter((p) => p.categories.length === 1 && p.categories[0] === "Lovely Nails");
+  // Only photos of the salon itself: the ones switched on as "Photo of the salon" in the Studio.
+  const photos = (await getWorkPhotos()).filter((p) => p.salon);
   return (
     <PageShell>
       <SalonGallery photos={photos} />
